@@ -38,22 +38,23 @@ public class CheckingService {
     }
 
 
-    public Account addChecking(AccountDTO checkingDTO) {
+    public Account addChecking(AccountDTO accountDTO) {
 
-        AccountHolder primaryOwner = accountHolderRepository.findById(checkingDTO.getPrimaryOwnerId())
+        AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
         AccountHolder secondaryOwner = null;
-        if(checkingDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(checkingDTO.getSecondaryOwnerId())
+        if(accountDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(accountDTO.getSecondaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
         if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
-            Account studentChecking = new StudentChecking(checkingDTO.getBalance(), checkingDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("20.0"));
+            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"));
             return accountRepository.save(studentChecking);
 
         }else{
-            Account Checking = new Checking(checkingDTO.getBalance(), checkingDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("20.0"));
+            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"));
             return accountRepository.save(Checking);
         }
 
     }
+
 }

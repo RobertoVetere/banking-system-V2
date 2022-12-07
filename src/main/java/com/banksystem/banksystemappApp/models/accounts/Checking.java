@@ -47,20 +47,6 @@ public class Checking extends Account{
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
     }
 
-    /*
-    public static void accountHolderAgeValidate(AccountHolder primaryOwner, Checking checking, StudentChecking studentChecking){
-        LocalDate dB= primaryOwner.getDateOfBirth();
-        LocalDate now = LocalDate.now();
-
-        if (dB.isBefore(now.minusYears(24))){
-            System.out.println("es mayor de 24 años");
-        }else{
-            System.out.println("es menor de 24 años");
-        }
-
-    }
-
-     */
     public void setPrimaryOwner( AccountHolder primaryOwner) {
         super.setPrimaryOwner(primaryOwner);
     }

@@ -15,7 +15,5 @@ public class AdminService {
 
 
 
-    public List<Admin> findAllAdmin() {
-        return adminRepository.findAll();
-    }
+
 }

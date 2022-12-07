@@ -41,9 +41,7 @@ public class CreditCard extends Account {
 
         if (creditLimit.compareTo(limit) > 0) {
 
-            System.out.println("you have exceeded the maximum limit of 100.000");
-
-            this.creditLimit = new BigDecimal("100000.00");
+            this.creditLimit = limit;
 
         }else{
 
@@ -62,9 +60,7 @@ public class CreditCard extends Account {
 
         if (interestRate.compareTo(interesRateLimit) < 0) {
 
-            System.out.println("the interest rate may not be lower than 0.1");
-
-            this.interestRate = new BigDecimal("0.10");
+            this.interestRate = interesRateLimit;
 
         }else{
 
