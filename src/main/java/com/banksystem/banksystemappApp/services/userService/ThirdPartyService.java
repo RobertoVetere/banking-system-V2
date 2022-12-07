@@ -16,4 +16,10 @@ public class ThirdPartyService {
     public List<ThirdParty> findAllThirdParty() {
         return thirdPartyRepository.findAll();
     }
+
+
+    public ThirdParty addThirdParty(ThirdParty thirdParty) {
+
+        return thirdPartyRepository.save(thirdParty);
+    }
 }

@@ -5,11 +5,13 @@ import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.users.Admin;
 
+import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.services.accountService.AccountService;
 import com.banksystem.banksystemappApp.services.accountService.CheckingService;
 import com.banksystem.banksystemappApp.services.accountService.CreditCardService;
 import com.banksystem.banksystemappApp.services.accountService.SavingsService;
 import com.banksystem.banksystemappApp.services.userService.AdminService;
+import com.banksystem.banksystemappApp.services.userService.ThirdPartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,9 @@ public class AdminController {
 
     @Autowired
     AccountService  accountService;
+
+    @Autowired
+    ThirdPartyService  thirdPartyService;
 
     @GetMapping("/checking-all")
     @ResponseStatus(HttpStatus.OK)
@@ -60,6 +65,14 @@ public class AdminController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
         return accountService.updateAccountBalance(id, balance);
+    }
+
+
+
+    @PostMapping("/add-third-party")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ThirdParty addNewThirdParty(@RequestBody ThirdParty thirdParty) {
+        return thirdPartyService.addThirdParty(thirdParty);
     }
 
 
