@@ -1,5 +1,6 @@
 package com.banksystem.banksystemappApp.CheckingTests;
 
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.Savings;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
@@ -40,7 +41,7 @@ public class CheckingTests {
                 new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
         Checking account = new Checking(new BigDecimal("24523.00"),1234L,primaryOwner,secondaryOwner2,
-                new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"));
+                new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"), AccountType.CHECKING);
 
         checkingRepository.save(account);
 
@@ -72,18 +73,18 @@ public class CheckingTests {
 
     @Test
     void shouldSetMinimumBalanceDefault_OK(){
-        Checking saving = new Checking(new BigDecimal("24523.00"),1234L,null,null,
-                new BigDecimal("20.0"));
-        checkingRepository.save(saving);
+        Checking checking = new Checking(new BigDecimal("24523.00"),1234L,null,null,
+                new BigDecimal("20.0"), AccountType.CHECKING);
+        checkingRepository.save(checking);
 
         assertEquals(new BigDecimal("250.00"),checkingRepository.findAll().get(1).getMinimumBalance());
     }
 
     @Test
     void shouldSetMonthlyMaintenanceFee_OK(){
-        Checking saving = new Checking(new BigDecimal("24523.00"),1234L,null,null,
-                new BigDecimal("20.0"));
-        checkingRepository.save(saving);
+        Checking checking = new Checking(new BigDecimal("24523.00"),1234L,null,null,
+                new BigDecimal("20.0"), AccountType.CHECKING);
+        checkingRepository.save(checking);
 
         assertEquals(new BigDecimal("12.00"),checkingRepository.findAll().get(1).getMonthlyMaintenanceFee());
     }

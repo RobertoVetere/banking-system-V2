@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
 import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.Savings;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -37,7 +39,29 @@ public class SavingsService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
         AccountHolder secondaryOwner = null;
 
-            Account saving = new Savings(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"));
+            Account saving = new Savings(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"),AccountType.SAVINGS);
             return accountRepository.save(saving);
+    }
+
+    public BigDecimal showSavingsBalance(Long id, Long secretKey) {
+        Savings account = savingsRepository.findById(id).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        if (secretKey.equals(account.getSecretKey())){
+            /*if (account.getAccountType().equals(AccountType.SAVINGS)
+
+                    & Duration.between(account.getCreatedDate().atStartOfDay(),LocalDate.now().atStartOfDay()).equals(365)){
+
+                Savings Savings = new Savings(account.getBalance(),account.getSecretKey(),account.getPrimaryOwner(),
+                        account.getSecondaryOwner(),account.getPenaltyFee(),AccountType.SAVINGS);
+
+                BigDecimal interesProfit = account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate()));
+            }
+
+             */
+            return account.getBalance();
+        }else {
+            return null;
+        }
     }
 }

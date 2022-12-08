@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
 import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.StudentChecking;
@@ -47,11 +48,11 @@ public class CheckingService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
         if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
-            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"));
+            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"), AccountType.STUDENTCHECKING);
             return accountRepository.save(studentChecking);
 
         }else{
-            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"));
+            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"),AccountType.CHECKING);
             return accountRepository.save(Checking);
         }
 

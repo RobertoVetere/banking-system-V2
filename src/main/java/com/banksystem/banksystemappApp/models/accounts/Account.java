@@ -1,5 +1,6 @@
 package com.banksystem.banksystemappApp.models.accounts;
 import com.banksystem.banksystemappApp.enums.AccountStatus;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,6 +47,9 @@ public abstract class Account {
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
+
     @OneToMany(mappedBy = "transactionOwner")
     @JsonIgnore
     private List<Transaction> transactionList = new ArrayList<>();
@@ -58,12 +62,22 @@ public abstract class Account {
     }
 
     public Account(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                   AccountHolder secondaryOwner, BigDecimal penaltyFee) {
+                   AccountHolder secondaryOwner, BigDecimal penaltyFee, AccountType accountType) {
         this.balance = balance;
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
+        setAccountType(accountType);
         setPenaltyFee(penaltyFee);
+    }
+
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public String getAccountNumber() {
@@ -155,12 +169,12 @@ public abstract class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return id.equals(account.id) && balance.equals(account.balance) && secretKey.equals(account.secretKey) && primaryOwner.equals(account.primaryOwner) && secondaryOwner.equals(account.secondaryOwner) && penaltyFee.equals(account.penaltyFee) && createdDate.equals(account.createdDate) && accountStatus == account.accountStatus;
+        return id.equals(account.id) && accountNumber.equals(account.accountNumber) && balance.equals(account.balance) && secretKey.equals(account.secretKey) && primaryOwner.equals(account.primaryOwner) && secondaryOwner.equals(account.secondaryOwner) && penaltyFee.equals(account.penaltyFee) && createdDate.equals(account.createdDate) && accountStatus == account.accountStatus && transactionList.equals(account.transactionList) && targetAccount.equals(account.targetAccount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, createdDate, accountStatus);
+        return Objects.hash(id, accountNumber, balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, createdDate, accountStatus, transactionList, targetAccount);
     }
 
     @Override

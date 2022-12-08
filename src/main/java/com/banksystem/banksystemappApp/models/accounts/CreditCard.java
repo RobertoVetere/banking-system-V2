@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.models.accounts;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.Entity;
 
@@ -18,18 +19,26 @@ public class CreditCard extends Account {
 
     public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
                       AccountHolder secondaryOwner, BigDecimal penaltyFee, BigDecimal creditLimit,
-                      BigDecimal interestRate) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
+                      BigDecimal interestRate, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
         setCreditLimit(creditLimit);
         setInterestRate(interestRate);
     }
 
     public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                      AccountHolder secondaryOwner, BigDecimal penaltyFee) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
+                      AccountHolder secondaryOwner, BigDecimal penaltyFee, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
     }
 
+    @Override
+    public AccountType getAccountType() {
+        return super.getAccountType();
+    }
 
+    @Override
+    public void setAccountType(AccountType accountType) {
+        super.setAccountType(AccountType.CREDITCARD);
+    }
 
     public BigDecimal getCreditLimit() {
         return creditLimit;

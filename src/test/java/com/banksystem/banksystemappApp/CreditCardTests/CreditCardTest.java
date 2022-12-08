@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.CreditCardTests;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.CreditCard;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.Address;
@@ -38,7 +39,7 @@ public class CreditCardTest {
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
 
         CreditCard creditCard1 = new CreditCard(new BigDecimal("1800.00"),789L,primaryOwner,secondaryOwner2,
-                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"));
+                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"), AccountType.CREDITCARD);
 
         creditCardRepository.saveAll(List.of(creditCard1));
     }
@@ -71,7 +72,7 @@ public class CreditCardTest {
     @Test
     void shouldSetDefaultCreditLimit100_OK(){
         CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),789L,null,null,
-                new BigDecimal("20.0"));
+                new BigDecimal("20.0"), AccountType.CREDITCARD);
         creditCardRepository.save(creditCard2);
 
         assertEquals(new BigDecimal("100.00"),creditCardRepository.findAll().get(1).getCreditLimit());
@@ -80,7 +81,7 @@ public class CreditCardTest {
     @Test
     void shouldSetDefaulInteresRate_OK(){
         CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),789L,null,null,
-                new BigDecimal("20.0"));
+                new BigDecimal("20.0"), AccountType.CREDITCARD);
         creditCardRepository.save(creditCard2);
 
         assertEquals(new BigDecimal("0.20"),creditCardRepository.findAll().get(1).getInterestRate());
@@ -88,7 +89,7 @@ public class CreditCardTest {
     @Test
     void shouldSetMaximumCreditAuto_IfLimitExceeded_OK(){
         CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),789L,null,null,
-                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"));
+                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"), AccountType.CREDITCARD);
         creditCardRepository.saveAll(List.of(creditCard2));
 
         assertEquals(new BigDecimal("100000.00"),creditCardRepository.findAll().get(1).getCreditLimit());
@@ -97,7 +98,7 @@ public class CreditCardTest {
     @Test
     void shouldSetInterestRateAuto_IfLimitExceeded_OK(){
         CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),789L,null,null,
-                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"));
+                new BigDecimal("20.0"),new BigDecimal("112000.00"),new BigDecimal("0.05"), AccountType.CREDITCARD);
         creditCardRepository.saveAll(List.of(creditCard2));
 
         assertEquals(new BigDecimal("0.10"),creditCardRepository.findAll().get(1).getInterestRate());

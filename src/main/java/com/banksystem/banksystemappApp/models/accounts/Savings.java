@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.models.accounts;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.Entity;
 import java.math.BigDecimal;
@@ -14,15 +15,25 @@ public class Savings extends Account {
     }
 
     public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   BigDecimal penaltyFee) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
+                   BigDecimal penaltyFee, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
     }
 
     public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   BigDecimal penaltyFee, BigDecimal minimumBalance, Double interestRate) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
+                   BigDecimal penaltyFee, BigDecimal minimumBalance, Double interestRate, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
+    }
+
+    @Override
+    public AccountType getAccountType() {
+        return super.getAccountType();
+    }
+
+    @Override
+    public void setAccountType(AccountType accountType) {
+        super.setAccountType(AccountType.SAVINGS);
     }
 
     public BigDecimal getMinimumBalance() {

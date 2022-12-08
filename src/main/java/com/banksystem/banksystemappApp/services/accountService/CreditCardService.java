@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
 import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.CreditCard;
@@ -44,7 +45,7 @@ public class CreditCardService {
         AccountHolder secondaryOwner = null;
 
         Account creditCard = new CreditCard(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner,
-                new BigDecimal("40.00"),accountDTO.getCreditLimit(),accountDTO.getInterestRate());
+                new BigDecimal("40.00"),accountDTO.getCreditLimit(),accountDTO.getInterestRate(), AccountType.CREDITCARD);
         return accountRepository.save(creditCard);
     }
 }
