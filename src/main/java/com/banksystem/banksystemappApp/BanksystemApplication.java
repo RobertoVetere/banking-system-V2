@@ -57,7 +57,11 @@ public class BanksystemApplication implements CommandLineRunner {
 				new Address("Calle de Enmedio",28850,"Torrejón","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-		accountHolderRepository.saveAll(List.of(primaryOwner, primaryOwner2,secondaryOwner2));
+		AccountHolder primaryOwner3 = new AccountHolder("Javier Alonso","1234",LocalDate.of(2000, 3, 18),
+				new Address("Calle de Enmedio",28850,"Torrejón","Spain"),
+				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
+
+		accountHolderRepository.saveAll(List.of(primaryOwner, primaryOwner2,secondaryOwner2,primaryOwner3));
 
 		Checking account = new Checking(new BigDecimal("24523.0"),1234L,primaryOwner,secondaryOwner2,
 				new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"));

@@ -3,6 +3,7 @@ import com.banksystem.banksystemappApp.enums.AccountStatus;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -11,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static com.banksystem.banksystemappApp.models.RandomClass.randomAccountNumber;
 
 @Entity
 @DynamicUpdate
@@ -21,6 +24,8 @@ public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    final String accountNumber = randomAccountNumber();
 
     private BigDecimal balance;
 
@@ -41,8 +46,13 @@ public abstract class Account {
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
-    @ManyToMany(mappedBy = "accountList")
+    @OneToMany(mappedBy = "transactionOwner")
+    @JsonIgnore
     private List<Transaction> transactionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "targetAccount")
+    @JsonIgnore
+    private List<Transaction> targetAccount = new ArrayList<>();
 
     public Account() {
     }

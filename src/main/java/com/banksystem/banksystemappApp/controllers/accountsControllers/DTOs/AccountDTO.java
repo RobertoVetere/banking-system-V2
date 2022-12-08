@@ -2,6 +2,8 @@ package com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs;
 
 import java.math.BigDecimal;
 
+import static com.banksystem.banksystemappApp.models.RandomClass.randomAccountNumber;
+
 public class AccountDTO {
 
     private Long primaryOwnerId;

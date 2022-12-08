@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.models.users;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -35,9 +36,11 @@ public class AccountHolder extends User {
     private Address primaryAddress;
 
     @OneToMany(mappedBy = "primaryOwner")
+    @JsonIgnore
     private List<Account> accountList = new ArrayList<>();
 
     @OneToMany(mappedBy = "secondaryOwner")
+    @JsonIgnore
     private List<Account> accountListSecondary = new ArrayList<>();
 
 
