@@ -37,12 +37,7 @@ public class AccountService {
 
         if (secretKey.equals(account.getSecretKey())){
             return account.getBalance();
-
-            } else {
-
-            return null;
         }
+        return null;
     }
-
-
 }

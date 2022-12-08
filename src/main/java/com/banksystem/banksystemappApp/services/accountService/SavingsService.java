@@ -43,25 +43,42 @@ public class SavingsService {
             return accountRepository.save(saving);
     }
 
-    public BigDecimal showSavingsBalance(Long id, Long secretKey) {
+    public BigDecimal showSavingBalance(Long id, Long secretKey) {
+
+
         Savings account = savingsRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
         if (secretKey.equals(account.getSecretKey())){
-            /*if (account.getAccountType().equals(AccountType.SAVINGS)
 
-                    & Duration.between(account.getCreatedDate().atStartOfDay(),LocalDate.now().atStartOfDay()).equals(365)){
+           // LocalDate date = LocalDate.();
 
-                Savings Savings = new Savings(account.getBalance(),account.getSecretKey(),account.getPrimaryOwner(),
-                        account.getSecondaryOwner(),account.getPenaltyFee(),AccountType.SAVINGS);
+            if (Period.between(account.getCreatedDate(), LocalDate.now()).getYears() > 1) {
+                //||Period.between(date, LocalDate.now()).getYears() < 1
+                account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
 
-                BigDecimal interesProfit = account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate()));
+                //Savings Savings = new Savings(account.getBalance(),account.getSecretKey(),account.getPrimaryOwner(),
+                  //      account.getSecondaryOwner(),account.getPenaltyFee(),AccountType.SAVINGS);
+
+                //BigDecimal interesProfit = account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate()));
             }
-
-             */
             return account.getBalance();
-        }else {
+        }
             return null;
         }
     }
-}
+
+
+/*
+    public BigDecimal showSavingBalance(Long id, Long secretKey) {
+        Savings account = savingsRepository.findById(id).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        if (secretKey.equals(account.getSecretKey())){
+            return account.getBalance();
+        }
+        return null;
+    }
+
+ */
+

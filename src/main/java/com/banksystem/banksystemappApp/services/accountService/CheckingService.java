@@ -55,7 +55,5 @@ public class CheckingService {
             Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"),AccountType.CHECKING);
             return accountRepository.save(Checking);
         }
-
     }
-
 }

@@ -54,6 +54,6 @@ public class AccountHolderController {
     @GetMapping("/savings-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getSavingBalance(@PathVariable Long id, @RequestParam Long secretKey){
-        return savingsService.showSavingsBalance(id , secretKey);
+        return savingsService.showSavingBalance(id , secretKey);
     }
 }

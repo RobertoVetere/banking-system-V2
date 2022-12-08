@@ -45,7 +45,11 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(1985, 1, 8));
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(2018, 1, 8));
-/*
+
+		AccountHolder BankOfNeverland = new AccountHolder("Bank Of Neverland","1234",LocalDate.of(1980, 3, 25),
+				new Address("carrer Sant Beatle",87562,"Tenerife","Spain"),
+				new Address("calle Jardín Bogdanico",45638,"Madrid","Spain"));
+
 		AccountHolder primaryOwner = new AccountHolder("Marta Perez","1234",LocalDate.of(2000, 1, 8),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
@@ -62,7 +66,7 @@ public class BanksystemApplication implements CommandLineRunner {
 				new Address("Calle de Enmedio",28850,"Torrejón","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-		accountHolderRepository.saveAll(List.of(primaryOwner, primaryOwner2,secondaryOwner2,primaryOwner3));
+		accountHolderRepository.saveAll(List.of(primaryOwner, primaryOwner2,secondaryOwner2,primaryOwner3,BankOfNeverland));
 
 		Checking account = new Checking(new BigDecimal("2452300.00"),1234L,primaryOwner,null,
 				new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"), AccountType.CHECKING);
@@ -86,11 +90,8 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		creditCardRepository.saveAll(List.of(creditCard1));
 
-
-
-
- */
-
+		Checking bankAccount = new Checking(new BigDecimal("8000000000.00"),1234L,BankOfNeverland,null,new BigDecimal("0.00"),AccountType.CHECKING);
+		checkingRepository.save(bankAccount);
 
 
 
