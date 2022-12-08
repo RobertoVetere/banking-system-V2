@@ -76,17 +76,38 @@ public class TransactionService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
     }
 
-    public Account deposit(Long id, BigDecimal balance) {
+    public Account deposit(Long id, BigDecimal deposit) {
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        account.setBalance(account.getBalance().add(balance));
+        account.setBalance(account.getBalance().add(deposit));
+        accountRepository.save(account);
 
-        Transaction transaction = new Transaction(account.getAccountNumber(),account,balance, TransactionType.DEPOSIT);
-        transactionRepository.save(transaction);
+            Transaction transaction = new Transaction(account.getAccountNumber(),account,deposit, TransactionType.DEPOSIT);
+            transactionRepository.save(transaction);
 
         return accountRepository.save(account);
     }
+
+    public Account withdrawal(Long accountNumber, BigDecimal withdrawal) {
+        Account account = accountRepository.findById(accountNumber).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        if (account.getBalance().compareTo(withdrawal) < 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
+        }else{
+
+            account.setBalance(account.getBalance().subtract(withdrawal));
+            accountRepository.save(account);
+
+                Transaction transaction = new Transaction(account.getAccountNumber(),account,withdrawal, TransactionType.WITHDRAWAL);
+                transactionRepository.save(transaction);
+
+        }
+
+        return accountRepository.save(account);
+    }
+
 
 
 

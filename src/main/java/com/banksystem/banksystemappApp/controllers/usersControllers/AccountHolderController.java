@@ -57,9 +57,15 @@ public class AccountHolderController {
         return savingsService.showSavingBalance(id , secretKey);
     }
 
-    @PatchMapping("/update-balance/{id}")
+    @PatchMapping("/deposit/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
-        return transactionService.deposit(id, balance);
+    public Account deposit(@PathVariable Long id, @RequestParam BigDecimal deposit){
+        return transactionService.deposit(id, deposit);
+    }
+
+    @PatchMapping("/withdrawal/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
+        return transactionService.deposit(id, withdrawal);
     }
 }
