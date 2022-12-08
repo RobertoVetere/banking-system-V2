@@ -44,7 +44,7 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(1985, 1, 8));
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(2018, 1, 8));
-/*
+
 		AccountHolder primaryOwner = new AccountHolder("Marta Perez","1234",LocalDate.of(2000, 1, 8),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
@@ -63,14 +63,14 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		accountHolderRepository.saveAll(List.of(primaryOwner, primaryOwner2,secondaryOwner2,primaryOwner3));
 
-		Checking account = new Checking(new BigDecimal("24523.0"),1234L,primaryOwner,secondaryOwner2,
+		Checking account = new Checking(new BigDecimal("2452300.00"),1234L,primaryOwner,null,
 				new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"));
 
 		StudentChecking StudentAccount = new StudentChecking(new BigDecimal("24523.0"),1234L,
-				primaryOwner,secondaryOwner2,
+				primaryOwner2,secondaryOwner2,
 				new BigDecimal("20.0"));
 
-		Checking account2 = new Checking(new BigDecimal("12456.0"),4567L,primaryOwner,secondaryOwner2,
+		Checking account2 = new Checking(new BigDecimal("0.00"),4567L,primaryOwner2,null,
 				new BigDecimal("20.0"),new BigDecimal("100.0"),new BigDecimal("3.0"));
 
 		checkingRepository.saveAll(List.of(account,account2));
@@ -87,7 +87,7 @@ public class BanksystemApplication implements CommandLineRunner {
 
 
 
- */
+
 
 
 

@@ -12,11 +12,15 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public abstract class Transaction {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transaction_id;
+
+    private String transactionOwnerAccountNumber;
+
+    private String targetAccountNumber;
 
     @ManyToOne
     @JoinColumn(name = "transaction_owner")
@@ -33,14 +37,32 @@ public abstract class Transaction {
     private LocalDate initiationDate = LocalDate.now();
 
 
-    protected Transaction() {
+    public Transaction() {
     }
 
-    public Transaction(Account transactionOwner, Account targetAccount, String targetOwnerName, BigDecimal amount) {
+    public Transaction(String transactionOwnerAccountNumber, String targetAccountNumber, Account transactionOwner, Account targetAccount, String targetOwnerName, BigDecimal amount) {
+        this.transactionOwnerAccountNumber = transactionOwnerAccountNumber;
+        this.targetAccountNumber = targetAccountNumber;
         this.transactionOwner = transactionOwner;
         this.targetAccount = targetAccount;
         this.targetOwnerName = targetOwnerName;
         this.amount = amount;
+    }
+
+    public String getTransactionOwnerAccountNumber() {
+        return transactionOwnerAccountNumber;
+    }
+
+    public void setTransactionOwnerAccountNumber(String transactionOwnerAccountNumber) {
+        this.transactionOwnerAccountNumber = transactionOwnerAccountNumber;
+    }
+
+    public String getTargetAccountNumber() {
+        return targetAccountNumber;
+    }
+
+    public void setTargetAccountNumber(String targetAccountNumber) {
+        this.targetAccountNumber = targetAccountNumber;
     }
 
     public Long getTransaction_id() {
@@ -90,6 +112,7 @@ public abstract class Transaction {
     public void setInitiationDate(LocalDate initiationDate) {
         this.initiationDate = initiationDate;
     }
+
 
     @Override
     public boolean equals(Object o) {

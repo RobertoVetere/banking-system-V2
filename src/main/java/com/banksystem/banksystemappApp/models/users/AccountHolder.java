@@ -1,5 +1,6 @@
 package com.banksystem.banksystemappApp.models.users;
 import com.banksystem.banksystemappApp.models.accounts.Account;
+import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -42,6 +43,7 @@ public class AccountHolder extends User {
     @OneToMany(mappedBy = "secondaryOwner")
     @JsonIgnore
     private List<Account> accountListSecondary = new ArrayList<>();
+
 
 
     public AccountHolder() {

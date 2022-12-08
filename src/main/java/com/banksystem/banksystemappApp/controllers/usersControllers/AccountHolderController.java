@@ -1,6 +1,10 @@
 package com.banksystem.banksystemappApp.controllers.usersControllers;
+import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.controllers.transactionDTO.TransactionDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
+import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
+import com.banksystem.banksystemappApp.services.TransactionService;
 import com.banksystem.banksystemappApp.services.accountService.AccountService;
 import com.banksystem.banksystemappApp.services.userService.AccountHolderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,9 @@ public class AccountHolderController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    TransactionService  transactionService;
+
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -31,6 +38,12 @@ public class AccountHolderController {
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getAccounBalance(@PathVariable Long id, @RequestParam Long secretKey){
         return accountService.showAccountBalance(id , secretKey);
+    }
+
+    @PostMapping("/transfer")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Transaction makeTransfer(@RequestBody TransactionDTO transactionDTO) {
+        return transactionService.makeTransfer(transactionDTO);
     }
 
 

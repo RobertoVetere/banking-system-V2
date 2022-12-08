@@ -66,6 +66,26 @@ public abstract class Account {
         setPenaltyFee(penaltyFee);
     }
 
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
+    }
+
+    public List<Transaction> getTargetAccount() {
+        return targetAccount;
+    }
+
+    public void setTargetAccount(List<Transaction> targetAccount) {
+        this.targetAccount = targetAccount;
+    }
+
     public Long getId() {
         return id;
     }
