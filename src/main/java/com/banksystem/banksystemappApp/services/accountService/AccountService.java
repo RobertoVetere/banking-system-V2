@@ -42,7 +42,7 @@ public class AccountService {
         if (secretKey.equals(account.getSecretKey())){
             return account.getBalance();
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
     }
 
 }

@@ -71,16 +71,4 @@ public class SavingsService {
     }
 
 
-/*
-    public BigDecimal showSavingBalance(Long id, Long secretKey) {
-        Savings account = savingsRepository.findById(id).orElseThrow
-                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
-
-        if (secretKey.equals(account.getSecretKey())){
-            return account.getBalance();
-        }
-        return null;
-    }
-
- */
 

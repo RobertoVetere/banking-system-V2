@@ -58,12 +58,11 @@ public class TransactionService {
                         & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
 
                 if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
-                    System.out.println("Sorry, insufficient founds");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
                 } else {
                     transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
                     targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
 
-                    System.out.println("Transaction is correctly");
 
                     accountRepository.saveAll(List.of(transactionOwner, targetAccount));
 
@@ -74,7 +73,7 @@ public class TransactionService {
             }else {
                 System.out.println("Target name is invalid");
             }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
     }
 
     public Account deposit(Long id, BigDecimal balance) {
@@ -102,12 +101,10 @@ public class TransactionService {
                 & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
 
             if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
-                System.out.println("Sorry, insufficient founds");
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
             } else {
                 transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
                 targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
-
-                System.out.println("Transaction is correctly");
 
                 accountRepository.saveAll(List.of(transactionOwner, targetAccount));
 
@@ -115,10 +112,9 @@ public class TransactionService {
                         transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
                 return transactionRepository.save(transaction);
             }
-        }else {
-            System.out.println("Target name is invalid");
         }
-        return null;
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
     }
 
 
