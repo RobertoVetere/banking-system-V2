@@ -26,15 +26,16 @@ public class Checking extends Account{
     }
 
     public Checking(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                    BigDecimal penaltyFee,  BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                      BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         this.minimumBalance = minimumBalance;
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
 
     }
+
     public Checking(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                    BigDecimal penaltyFee, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                     AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
     @Override

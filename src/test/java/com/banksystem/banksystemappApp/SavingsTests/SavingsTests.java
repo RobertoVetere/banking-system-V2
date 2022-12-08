@@ -38,7 +38,7 @@ public class SavingsTests {
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
 
         Savings saving = new Savings(new BigDecimal("1800.00"),1234L,primaryOwner,secondaryOwner2,
-                new BigDecimal("20.0"),new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
+                new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
         savingsRepository.save(saving);
 
 
@@ -72,7 +72,7 @@ public class SavingsTests {
     @Test
     void shouldSetInterestRateAuto_IfLimitExceeded_OK(){
         Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
-                new BigDecimal("20.0"),new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
+                new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
         assertEquals(0.50,savingsRepository.findAll().get(1).getInterestRate());
@@ -81,7 +81,7 @@ public class SavingsTests {
     @Test
     void shouldSetMinimumBalanceAuto_IfLimitExceeded_OK(){
         Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
-                new BigDecimal("20.0"),new BigDecimal("50.00"),0.70, AccountType.SAVINGS);
+                new BigDecimal("50.00"),0.70, AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
         assertEquals(new BigDecimal("100.00"),savingsRepository.findAll().get(1).getMinimumBalance());
@@ -91,7 +91,7 @@ public class SavingsTests {
     @Test
     void shouldSetInterestRateDefault_OK(){
         Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
-                new BigDecimal("20.0"), AccountType.SAVINGS);
+                 AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
         assertEquals(0.0025,savingsRepository.findAll().get(1).getInterestRate());
@@ -100,7 +100,7 @@ public class SavingsTests {
     @Test
     void shouldSetBalanceLessThan1000_OK(){
         Savings saving2 = new Savings(new BigDecimal("800.00"),1234L,null,null,
-                new BigDecimal("20.0"), AccountType.SAVINGS);
+                 AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
         assertEquals(new BigDecimal("800.00"),savingsRepository.findAll().get(1).getBalance());
@@ -109,7 +109,7 @@ public class SavingsTests {
     @Test
     void shouldSetMinimumBalanceDefault_OK(){
         Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
-                new BigDecimal("20.0"), AccountType.SAVINGS);
+                 AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
         assertEquals(new BigDecimal("1000.00"),savingsRepository.findAll().get(1).getMinimumBalance());

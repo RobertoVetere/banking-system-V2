@@ -11,8 +11,8 @@ public class StudentChecking extends Account {
     }
 
     public StudentChecking(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                           AccountHolder secondaryOwner, BigDecimal penaltyFee, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                           AccountHolder secondaryOwner,AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner,accountType);
     }
 
     @Override

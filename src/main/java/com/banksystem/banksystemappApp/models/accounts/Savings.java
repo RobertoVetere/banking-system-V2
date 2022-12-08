@@ -15,13 +15,13 @@ public class Savings extends Account {
     }
 
     public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   BigDecimal penaltyFee, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                   AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
     public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   BigDecimal penaltyFee, BigDecimal minimumBalance, Double interestRate, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                   BigDecimal minimumBalance, Double interestRate, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
     }

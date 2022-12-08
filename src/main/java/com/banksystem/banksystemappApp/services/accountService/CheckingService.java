@@ -48,11 +48,11 @@ public class CheckingService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
         if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
-            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"), AccountType.STUDENTCHECKING);
+            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.STUDENTCHECKING);
             return accountRepository.save(studentChecking);
 
         }else{
-            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, new BigDecimal("40.00"),AccountType.CHECKING);
+            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.CHECKING);
             return accountRepository.save(Checking);
         }
     }

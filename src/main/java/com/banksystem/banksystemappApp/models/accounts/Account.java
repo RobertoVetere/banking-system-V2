@@ -39,7 +39,7 @@ public abstract class Account {
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;
 
-    private BigDecimal penaltyFee = new BigDecimal("40.00");;
+    private BigDecimal penaltyFee = new BigDecimal("40.00");
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate createdDate = LocalDate.now();
@@ -62,13 +62,12 @@ public abstract class Account {
     }
 
     public Account(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                   AccountHolder secondaryOwner, BigDecimal penaltyFee, AccountType accountType) {
+                   AccountHolder secondaryOwner,  AccountType accountType) {
         this.balance = balance;
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
         setAccountType(accountType);
-        setPenaltyFee(penaltyFee);
     }
 
 
@@ -140,13 +139,6 @@ public abstract class Account {
         this.secondaryOwner = secondaryOwner;
     }
 
-    public BigDecimal getPenaltyFee() {
-        return penaltyFee;
-    }
-
-    public void setPenaltyFee(BigDecimal penaltyFee) {
-        this.penaltyFee = penaltyFee;
-    }
 
     public LocalDate getCreatedDate() {
         return createdDate;

@@ -18,16 +18,16 @@ public class CreditCard extends Account {
     }
 
     public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                      AccountHolder secondaryOwner, BigDecimal penaltyFee, BigDecimal creditLimit,
+                      AccountHolder secondaryOwner, BigDecimal creditLimit,
                       BigDecimal interestRate, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+        super(balance, secretKey, primaryOwner, secondaryOwner,  accountType);
         setCreditLimit(creditLimit);
         setInterestRate(interestRate);
     }
 
     public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
-                      AccountHolder secondaryOwner, BigDecimal penaltyFee, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee, accountType);
+                      AccountHolder secondaryOwner, AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
     @Override

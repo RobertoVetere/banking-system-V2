@@ -45,7 +45,7 @@ public class CreditCardService {
         AccountHolder secondaryOwner = null;
 
         Account creditCard = new CreditCard(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner,
-                new BigDecimal("40.00"),accountDTO.getCreditLimit(),accountDTO.getInterestRate(), AccountType.CREDITCARD);
+                accountDTO.getCreditLimit(),accountDTO.getInterestRate(), AccountType.CREDITCARD);
         return accountRepository.save(creditCard);
     }
 }
