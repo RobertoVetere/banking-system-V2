@@ -56,4 +56,10 @@ public class AccountHolderController {
     public BigDecimal getSavingBalance(@PathVariable Long id, @RequestParam Long secretKey){
         return savingsService.showSavingBalance(id , secretKey);
     }
+
+    @PatchMapping("/update-balance/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
+        return transactionService.deposit(id, balance);
+    }
 }

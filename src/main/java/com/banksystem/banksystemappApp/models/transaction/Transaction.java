@@ -1,5 +1,6 @@
 package com.banksystem.banksystemappApp.models.transaction;
 
+import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.*;
@@ -35,18 +36,37 @@ public class Transaction {
     private BigDecimal amount;
 
     private LocalDate initiationDate = LocalDate.now();
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
 
     public Transaction() {
     }
 
-    public Transaction(String transactionOwnerAccountNumber, String targetAccountNumber, Account transactionOwner, Account targetAccount, String targetOwnerName, BigDecimal amount) {
+    public Transaction(String transactionOwnerAccountNumber, String targetAccountNumber, Account transactionOwner,
+                       Account targetAccount, String targetOwnerName, BigDecimal amount,TransactionType transactionType) {
         this.transactionOwnerAccountNumber = transactionOwnerAccountNumber;
         this.targetAccountNumber = targetAccountNumber;
         this.transactionOwner = transactionOwner;
         this.targetAccount = targetAccount;
         this.targetOwnerName = targetOwnerName;
         this.amount = amount;
+        this.transactionType = transactionType;
+    }
+
+    public Transaction(String transactionOwnerAccountNumber, Account transactionOwner, BigDecimal amount, TransactionType transactionType) {
+        this.transactionOwnerAccountNumber = transactionOwnerAccountNumber;
+        this.transactionOwner = transactionOwner;
+        this.amount = amount;
+        this.transactionType = transactionType;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 
     public String getTransactionOwnerAccountNumber() {

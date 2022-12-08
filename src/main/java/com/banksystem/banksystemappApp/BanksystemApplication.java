@@ -50,7 +50,7 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(1985, 1, 8));
 		//AccountHolder.accountHolderAgeValidate(LocalDate.of(2018, 1, 8));
-/*
+
 		AccountHolder BankOfNeverland = new AccountHolder("Bank Of Neverland","1234",LocalDate.of(1980, 3, 25),
 				new Address("carrer Sant Beatle",87562,"Tenerife","Spain"),
 				new Address("calle Jardín Bogdanico",45638,"Madrid","Spain"));
@@ -102,7 +102,6 @@ public class BanksystemApplication implements CommandLineRunner {
 		thirdPartyRepository.save(thirdParty);
 
 
- */
 
 
 

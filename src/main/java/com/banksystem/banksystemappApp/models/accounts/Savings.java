@@ -46,9 +46,7 @@ public class Savings extends Account {
 
         if (minimumBalance.compareTo(limit) < 0) {
 
-            System.out.println("the minimum balance is 100.00 euro");
-
-            this.minimumBalance = new BigDecimal("100.00");
+            this.minimumBalance = limit;
 
         }else{
 

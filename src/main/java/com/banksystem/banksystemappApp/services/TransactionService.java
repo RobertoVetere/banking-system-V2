@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.services;
 
 import com.banksystem.banksystemappApp.controllers.transactionDTO.TransactionDTO;
+import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
@@ -67,13 +68,25 @@ public class TransactionService {
                     accountRepository.saveAll(List.of(transactionOwner, targetAccount));
 
                     Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                            transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount());
+                            transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
                     return transactionRepository.save(transaction);
                 }
             }else {
                 System.out.println("Target name is invalid");
             }
         return null;
+    }
+
+    public Account deposit(Long id, BigDecimal balance) {
+        Account account = accountRepository.findById(id).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        account.setBalance(account.getBalance().add(balance));
+
+        Transaction transaction = new Transaction(account.getAccountNumber(),account,balance, TransactionType.DEPOSIT);
+        transactionRepository.save(transaction);
+
+        return accountRepository.save(account);
     }
 
 
@@ -99,7 +112,7 @@ public class TransactionService {
                 accountRepository.saveAll(List.of(transactionOwner, targetAccount));
 
                 Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                        transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount());
+                        transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
                 return transactionRepository.save(transaction);
             }
         }else {

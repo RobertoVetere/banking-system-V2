@@ -39,7 +39,7 @@ public abstract class Account {
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;
 
-    private BigDecimal penaltyFee = new BigDecimal("40.00");
+    final BigDecimal penaltyFee = new BigDecimal("40.00");
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate createdDate = LocalDate.now();

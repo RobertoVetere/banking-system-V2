@@ -1,9 +1,12 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
+import com.banksystem.banksystemappApp.controllers.transactionDTO.TransactionDTO;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.Savings;
+import com.banksystem.banksystemappApp.models.transaction.Transaction;
+import com.banksystem.banksystemappApp.repositories.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.fasterxml.jackson.datatype.jsr310.ser.MonthDaySerializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,8 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-
+    @Autowired
+    TransactionRepository transactionRepository;
 
     public Account updateAccountBalance(Long id, BigDecimal balance) {
         Account account = accountRepository.findById(id).orElseThrow
@@ -40,4 +44,5 @@ public class AccountService {
         }
         return null;
     }
+
 }
