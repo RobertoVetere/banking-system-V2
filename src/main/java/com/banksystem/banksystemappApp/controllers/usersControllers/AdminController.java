@@ -75,5 +75,18 @@ public class AdminController {
         return thirdPartyService.addThirdParty(thirdParty);
     }
 
+    @DeleteMapping("/delete-checking/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteProduct(@PathVariable("id") Long id) {
+        checkingService.deleteChecking(id);
+    }
+
+    @DeleteMapping("/delete-saving/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteSaving(@PathVariable("id") Long id) {
+        savingsService.deleteSaving(id);
+    }
+
+
 
 }

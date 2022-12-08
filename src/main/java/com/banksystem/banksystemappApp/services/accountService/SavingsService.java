@@ -66,6 +66,8 @@ public class SavingsService {
         }
             return null;
         }
+
+        public void deleteSaving(Long id){savingsRepository.deleteById(id);}
     }
 
 

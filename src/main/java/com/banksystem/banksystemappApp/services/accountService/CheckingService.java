@@ -56,4 +56,8 @@ public class CheckingService {
             return accountRepository.save(Checking);
         }
     }
+
+    public void deleteChecking(Long id){
+        checkingRepository.deleteById(id);
+    }
 }

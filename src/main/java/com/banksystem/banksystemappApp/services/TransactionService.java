@@ -50,9 +50,11 @@ public class TransactionService {
 
         Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
 
-            if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
-                    & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber()))
-            {
+        if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
+                & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())
+                ||
+                targetAccount.getSecondaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
+                        & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
 
                 if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
                     System.out.println("Sorry, insufficient founds");
@@ -73,4 +75,38 @@ public class TransactionService {
             }
         return null;
     }
+
+
+
+    public Transaction thirdPartyTransfer(TransactionDTO transactionDTO) {
+
+        Account transactionOwner = accountRepository.findByAccountNumber(transactionDTO.getTransactionOwnerAccountNumber());
+
+        Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
+
+
+        if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
+                & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
+
+            if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
+                System.out.println("Sorry, insufficient founds");
+            } else {
+                transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
+                targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
+
+                System.out.println("Transaction is correctly");
+
+                accountRepository.saveAll(List.of(transactionOwner, targetAccount));
+
+                Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
+                        transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount());
+                return transactionRepository.save(transaction);
+            }
+        }else {
+            System.out.println("Target name is invalid");
+        }
+        return null;
+    }
+
+
 }

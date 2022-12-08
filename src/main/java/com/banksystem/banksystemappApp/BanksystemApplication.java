@@ -7,10 +7,12 @@ import com.banksystem.banksystemappApp.models.accounts.StudentChecking;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.users.Address;
+import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CreditCardRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CheckingRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
+import com.banksystem.banksystemappApp.repositories.userRepositories.ThirdPartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +37,9 @@ public class BanksystemApplication implements CommandLineRunner {
 
 	@Autowired
 	CreditCardRepository creditCardRepository;
+
+	@Autowired
+	ThirdPartyRepository thirdPartyRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BanksystemApplication.class, args);
@@ -92,6 +97,10 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		Checking bankAccount = new Checking(new BigDecimal("8000000000.00"),1234L,BankOfNeverland,null,new BigDecimal("0.00"),AccountType.CHECKING);
 		checkingRepository.save(bankAccount);
+
+		ThirdParty thirdParty = new ThirdParty("Third-Party-0001","12345679");
+		thirdPartyRepository.save(thirdParty);
+
 
 
 
