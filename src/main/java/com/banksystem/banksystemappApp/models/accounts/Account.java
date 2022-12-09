@@ -30,7 +30,7 @@ public abstract class Account {
 
     private BigDecimal balance;
 
-    private Long secretKey;
+    private String secretKey;
     @ManyToOne
     @JoinColumn(name = "primary_owner")
     private AccountHolder primaryOwner;
@@ -61,7 +61,7 @@ public abstract class Account {
     public Account() {
     }
 
-    public Account(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
+    public Account(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                    AccountHolder secondaryOwner,  AccountType accountType) {
         this.balance = balance;
         this.secretKey = secretKey;
@@ -115,11 +115,11 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public Long getSecretKey() {
+    public String getSecretKey() {
         return secretKey;
     }
 
-    public void setSecretKey(Long secretKey) {
+    public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 

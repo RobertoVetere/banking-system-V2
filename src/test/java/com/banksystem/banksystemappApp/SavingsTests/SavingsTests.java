@@ -37,7 +37,7 @@ public class SavingsTests {
                 new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
 
-        Savings saving = new Savings(new BigDecimal("1800.00"),1234L,primaryOwner,secondaryOwner2,
+        Savings saving = new Savings(new BigDecimal("1800.00"),"1234L",primaryOwner,secondaryOwner2,
                 new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
         savingsRepository.save(saving);
 
@@ -71,7 +71,7 @@ public class SavingsTests {
 
     @Test
     void shouldSetInterestRateAuto_IfLimitExceeded_OK(){
-        Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
+        Savings saving2 = new Savings(new BigDecimal("1800.00"),"1234L",null,null,
                 new BigDecimal("120.00"),0.70, AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
@@ -80,7 +80,7 @@ public class SavingsTests {
 
     @Test
     void shouldSetMinimumBalanceAuto_IfLimitExceeded_OK(){
-        Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
+        Savings saving2 = new Savings(new BigDecimal("1800.00"),"1234L",null,null,
                 new BigDecimal("50.00"),0.70, AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
@@ -90,7 +90,7 @@ public class SavingsTests {
 
     @Test
     void shouldSetInterestRateDefault_OK(){
-        Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
+        Savings saving2 = new Savings(new BigDecimal("1800.00"),"1234L",null,null,
                  AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
@@ -99,7 +99,7 @@ public class SavingsTests {
 
     @Test
     void shouldSetBalanceLessThan1000_OK(){
-        Savings saving2 = new Savings(new BigDecimal("800.00"),1234L,null,null,
+        Savings saving2 = new Savings(new BigDecimal("800.00"),"1234L",null,null,
                  AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 
@@ -108,7 +108,7 @@ public class SavingsTests {
 
     @Test
     void shouldSetMinimumBalanceDefault_OK(){
-        Savings saving2 = new Savings(new BigDecimal("1800.00"),1234L,null,null,
+        Savings saving2 = new Savings(new BigDecimal("1800.00"),"1234L",null,null,
                  AccountType.SAVINGS);
         savingsRepository.saveAll(List.of(saving2));
 

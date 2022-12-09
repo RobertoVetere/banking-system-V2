@@ -10,7 +10,7 @@ public class StudentChecking extends Account {
     public StudentChecking() {
     }
 
-    public StudentChecking(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
+    public StudentChecking(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                            AccountHolder secondaryOwner,AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner,accountType);
     }

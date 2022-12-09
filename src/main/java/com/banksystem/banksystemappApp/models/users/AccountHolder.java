@@ -44,6 +44,7 @@ public class AccountHolder extends User {
     @JsonIgnore
     private List<Account> accountListSecondary = new ArrayList<>();
 
+
     public AccountHolder() {
     }
 

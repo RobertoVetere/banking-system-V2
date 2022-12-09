@@ -14,12 +14,12 @@ public class Savings extends Account {
     public Savings() {
     }
 
-    public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+    public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
-    public Savings(BigDecimal balance, Long secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+    public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    BigDecimal minimumBalance, Double interestRate, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         setMinimumBalance(minimumBalance);
@@ -62,8 +62,6 @@ public class Savings extends Account {
     public void setInterestRate(Double interestRate) {
 
         if (interestRate > 0.5) {
-
-            System.out.println("the interest rate may not be lower than 0.5");
 
             this.interestRate = 0.5;
 

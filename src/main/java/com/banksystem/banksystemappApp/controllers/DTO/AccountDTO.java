@@ -12,14 +12,14 @@ public class AccountDTO {
 
     private BigDecimal balance;
 
-    private Long secretKey;
+    private String secretKey;
 
     private BigDecimal creditLimit;
 
     private BigDecimal interestRate;
 
     public AccountDTO(Long primaryOwnerId, Long secondaryOwnerId,
-                      BigDecimal balance, Long secretKey, BigDecimal creditLimit, BigDecimal interestRate) {
+                      BigDecimal balance, String secretKey, BigDecimal creditLimit, BigDecimal interestRate) {
         this.primaryOwnerId = primaryOwnerId;
         this.secondaryOwnerId = secondaryOwnerId;
         this.balance = balance;
@@ -52,11 +52,11 @@ public class AccountDTO {
         this.balance = balance;
     }
 
-    public Long getSecretKey() {
+    public String getSecretKey() {
         return secretKey;
     }
 
-    public void setSecretKey(Long secretKey) {
+    public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 

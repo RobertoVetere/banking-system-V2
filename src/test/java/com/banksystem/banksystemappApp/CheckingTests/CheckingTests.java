@@ -40,7 +40,7 @@ public class CheckingTests {
                 new Address("carrer la nada",28850,"Madrid","Spain"),
                 new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
-        Checking account = new Checking(new BigDecimal("24523.00"),1234L,primaryOwner,secondaryOwner2,
+        Checking account = new Checking(new BigDecimal("24523.00"),"1234L",primaryOwner,secondaryOwner2,
                 new BigDecimal("100.0"),new BigDecimal("3.0"), AccountType.CHECKING);
 
         checkingRepository.save(account);
@@ -74,7 +74,7 @@ public class CheckingTests {
     @Test
     void shouldSetMinimumBalanceDefault_OK(){
 
-        Checking checking = new Checking(new BigDecimal("24523.00"),1234L,null,null,
+        Checking checking = new Checking(new BigDecimal("24523.00"),"1234L",null,null,
                  AccountType.CHECKING);
         checkingRepository.save(checking);
 
@@ -83,7 +83,7 @@ public class CheckingTests {
 
     @Test
     void shouldSetMonthlyMaintenanceFee_OK(){
-        Checking checking = new Checking(new BigDecimal("24523.00"),1234L,null,null,
+        Checking checking = new Checking(new BigDecimal("24523.00"),"1234L",null,null,
                  AccountType.CHECKING);
         checkingRepository.save(checking);
 

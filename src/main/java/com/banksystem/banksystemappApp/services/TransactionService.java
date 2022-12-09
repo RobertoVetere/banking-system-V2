@@ -26,8 +26,6 @@ public class TransactionService {
 
 
 
-
-
     public Transaction makeTransfer(TransactionDTO transactionDTO) {
 
         Account transactionOwner = accountRepository.findByAccountNumber(transactionDTO.getTransactionOwnerAccountNumber());
@@ -53,8 +51,6 @@ public class TransactionService {
                             transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
                     return transactionRepository.save(transaction);
                 }
-            }else {
-                System.out.println("Target name is invalid");
             }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
     }
@@ -89,67 +85,35 @@ public class TransactionService {
         return accountRepository.save(account);
     }
 
+    public Account thirdPartyPayment(Long id , ThirdPartyDTO thirdPartyDTO) {
+
+        Account account = accountRepository.findById(id).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
 
-/*
-    public Transaction thirdPartyTransfer(ThirdPartyDTO transactionDTO) {
+        if (thirdPartyDTO.getSecretKey().equals(account.getSecretKey())){
 
-        Account transactionOwner = accountRepository.findByAccountNumber(transactionDTO.getTransactionOwnerAccountNumber());
+            if (account.getBalance().compareTo(thirdPartyDTO.getAmount()) > 0){
 
-        Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
+                account.setBalance(account.getBalance().subtract(thirdPartyDTO.getAmount()));
 
+            }else {
 
-        if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
-                & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
-
-            if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
-            } else {
-                transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
-                targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
-
-                accountRepository.saveAll(List.of(transactionOwner, targetAccount));
-
-                Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                        transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
-                return transactionRepository.save(transaction);
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
             }
+
+        }else{
+
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "¡UPS! Password Wrong");
+
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
+
+        Transaction transaction = new Transaction(account.getAccountNumber(),account,thirdPartyDTO.getAmount(), TransactionType.THIRD_PARTY_PAYMENT);
+        transactionRepository.save(transaction);
+
+        return accountRepository.save(account);
     }
-
- */
-
-    /*
-    public Transaction thirdPartyDeposit(ThirdPartyDTO thirdPartyDTO) {
-
-        Account transactionOwner = accountRepository.findByAccountNumber(thirdPartyDTO.getAccountNumber());
-
-        if (transactionOwner.getSecretKey().equals(thirdPartyDTO.getSecretKey())){
-
-        }
-                & targetAccount.getAccountNumber().equals(thirdPartyDTO.getAccountNumber())) {
-
-            if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
-            } else {
-                transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
-                targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
-
-                accountRepository.saveAll(List.of(transactionOwner, targetAccount));
-
-                Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                        transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
-                return transactionRepository.save(transaction);
-            }
-        }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
-    }
-
-
-     */
 
 
 }

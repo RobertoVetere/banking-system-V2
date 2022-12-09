@@ -8,9 +8,9 @@ public class ThirdPartyDTO {
 
     private String accountNumber;
 
-    private Long secretKey;
+    private String secretKey;
 
-    public ThirdPartyDTO(BigDecimal amount, String accountNumber, Long secretKey) {
+    public ThirdPartyDTO(BigDecimal amount, String accountNumber, String secretKey) {
         this.amount = amount;
         this.accountNumber = accountNumber;
         this.secretKey = secretKey;
@@ -32,11 +32,11 @@ public class ThirdPartyDTO {
         this.accountNumber = accountNumber;
     }
 
-    public Long getSecretKey() {
+    public String getSecretKey() {
         return secretKey;
     }
 
-    public void setSecretKey(Long secretKey) {
+    public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 }

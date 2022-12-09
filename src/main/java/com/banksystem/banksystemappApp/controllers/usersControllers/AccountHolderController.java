@@ -48,7 +48,7 @@ public class AccountHolderController {
     }
 
     @PostMapping("/transfer")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Transaction makeTransfer(@RequestBody TransactionDTO transactionDTO) {
         return transactionService.makeTransfer(transactionDTO);
     }

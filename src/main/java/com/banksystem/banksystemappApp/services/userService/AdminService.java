@@ -13,7 +13,5 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-
-
-
+    
 }

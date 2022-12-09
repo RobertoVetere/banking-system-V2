@@ -2,6 +2,7 @@ package com.banksystem.banksystemappApp.controllers.usersControllers;
 
 import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyDTO;
 import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
+import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.services.TransactionService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,17 +24,22 @@ public class ThirdPartyController {
     @Autowired
     TransactionService  transactionService;
 
-    @GetMapping("/third-party-All")
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<ThirdParty> findAllAccountHolders(){
         return thirdPartyService.findAllThirdParty();
     }
-/*
-    @PostMapping("/third-party-transfer")
+
+
+    @PatchMapping("/payment/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Transaction makeTransfer(@RequestBody ThirdPartyDTO thirdPartyDTO) {
-        return transactionService.thirdPartyDeposit(thirdPartyDTO);
+    public Account payment(@PathVariable Long id, @RequestBody ThirdPartyDTO thirdPartyDTO){
+        return transactionService.thirdPartyPayment(id , thirdPartyDTO);
     }
 
- */
+    @PatchMapping("/withdrawal/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
+        return transactionService.withdrawal(id, withdrawal);
+    }
 }

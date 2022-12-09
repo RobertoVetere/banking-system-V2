@@ -17,7 +17,7 @@ public class CreditCard extends Account {
     public CreditCard() {
     }
 
-    public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
+    public CreditCard(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                       AccountHolder secondaryOwner, BigDecimal creditLimit,
                       BigDecimal interestRate, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner,  accountType);
@@ -25,7 +25,7 @@ public class CreditCard extends Account {
         setInterestRate(interestRate);
     }
 
-    public CreditCard(BigDecimal balance, Long secretKey, AccountHolder primaryOwner,
+    public CreditCard(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                       AccountHolder secondaryOwner, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }

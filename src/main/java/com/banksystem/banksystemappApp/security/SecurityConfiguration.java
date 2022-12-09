@@ -29,15 +29,13 @@ public class SecurityConfiguration {
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic();
 
-        httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
-        /*
+       //httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
         httpSecurity.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/user-area").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/user-admin-area**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/user-details").hasAnyRole("ADMIN", "USER")
+               // .requestMatchers(HttpMethod.GET, "/user-area").hasRole("USER")
+              //  .requestMatchers(HttpMethod.GET, "/user-admin-area**").hasRole("ADMIN")
+              //  .requestMatchers(HttpMethod.GET, "/user-details").hasAnyRole("ADMIN", "USER")
+                .anyRequest().permitAll();
 
-
-         */
         httpSecurity.csrf().disable();
 
         return httpSecurity.build();
