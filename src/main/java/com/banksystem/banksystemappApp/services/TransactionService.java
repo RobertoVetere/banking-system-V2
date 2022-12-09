@@ -85,10 +85,9 @@ public class TransactionService {
         return accountRepository.save(account);
     }
 
-    public Account thirdPartyPayment(Long id , ThirdPartyDTO thirdPartyDTO) {
+    public Account thirdPartyPayment(ThirdPartyDTO thirdPartyDTO) {
 
-        Account account = accountRepository.findById(id).orElseThrow
-                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        Account account = accountRepository.findByAccountNumber(thirdPartyDTO.getAccountNumber());
 
 
         if (thirdPartyDTO.getSecretKey().equals(account.getSecretKey())){

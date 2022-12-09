@@ -31,10 +31,10 @@ public class ThirdPartyController {
     }
 
 
-    @PatchMapping("/payment/{id}")
+    @PatchMapping("/payment/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account payment(@PathVariable Long id, @RequestBody ThirdPartyDTO thirdPartyDTO){
-        return transactionService.thirdPartyPayment(id , thirdPartyDTO);
+    public Account payment(@RequestBody ThirdPartyDTO thirdPartyDTO){
+        return transactionService.thirdPartyPayment(thirdPartyDTO);
     }
 
     @PatchMapping("/receipts/")
