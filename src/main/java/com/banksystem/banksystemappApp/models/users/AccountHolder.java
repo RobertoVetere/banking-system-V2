@@ -44,8 +44,6 @@ public class AccountHolder extends User {
     @JsonIgnore
     private List<Account> accountListSecondary = new ArrayList<>();
 
-
-
     public AccountHolder() {
     }
 
@@ -55,6 +53,7 @@ public class AccountHolder extends User {
         this.mailingAddress = mailingAddress;
         this.primaryAddress = primaryAddress;
     }
+
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
