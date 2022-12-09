@@ -37,9 +37,10 @@ public class ThirdPartyController {
         return transactionService.thirdPartyPayment(id , thirdPartyDTO);
     }
 
-    @PatchMapping("/withdrawal/{id}")
+    @PatchMapping("/receipts/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
-        return transactionService.withdrawal(id, withdrawal);
+    public Account receipts(@RequestBody ThirdPartyDTO thirdPartyDTO){
+        return transactionService.thirdPartyReceipt(thirdPartyDTO);
     }
+
 }

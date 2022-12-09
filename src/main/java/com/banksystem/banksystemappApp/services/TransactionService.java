@@ -116,4 +116,15 @@ public class TransactionService {
     }
 
 
+    public Account thirdPartyReceipt(ThirdPartyDTO thirdPartyDTO) {
+
+        Account account = accountRepository.findByAccountNumber(thirdPartyDTO.getAccountNumber());
+
+                account.setBalance(account.getBalance().add(thirdPartyDTO.getAmount()));
+
+        Transaction transaction = new Transaction(account.getAccountNumber(),account,thirdPartyDTO.getAmount(), TransactionType.THIRD_PARTY_RECEIPTS);
+        transactionRepository.save(transaction);
+
+        return accountRepository.save(account);
+    }
 }
