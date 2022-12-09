@@ -57,6 +57,6 @@ public class CheckingService {
     }
 
     public void deleteChecking(Long id){
-        checkingRepository.deleteById(id);
+        accountRepository.deleteById(id);
     }
 }

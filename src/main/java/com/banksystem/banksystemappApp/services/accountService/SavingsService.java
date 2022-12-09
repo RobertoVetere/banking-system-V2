@@ -63,7 +63,6 @@ public class SavingsService {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
         }
 
-        public void deleteSaving(Long id){savingsRepository.deleteById(id);}
     }
 
 

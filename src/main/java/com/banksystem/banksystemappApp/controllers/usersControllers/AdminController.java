@@ -79,12 +79,5 @@ public class AdminController {
         checkingService.deleteChecking(id);
     }
 
-    @DeleteMapping("/delete-saving/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteSaving(@PathVariable("id") Long id) {
-        savingsService.deleteSaving(id);
-    }
-
-
 
 }

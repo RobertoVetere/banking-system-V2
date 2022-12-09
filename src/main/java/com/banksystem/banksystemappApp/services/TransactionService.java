@@ -71,8 +71,8 @@ public class TransactionService {
         return accountRepository.save(account);
     }
 
-    public Account withdrawal(Long accountNumber, BigDecimal withdrawal) {
-        Account account = accountRepository.findById(accountNumber).orElseThrow
+    public Account withdrawal(Long id, BigDecimal withdrawal) {
+        Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
         if (account.getBalance().compareTo(withdrawal) < 0) {

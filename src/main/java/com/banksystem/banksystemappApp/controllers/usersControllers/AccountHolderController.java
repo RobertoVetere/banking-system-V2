@@ -68,7 +68,7 @@ public class AccountHolderController {
     @PatchMapping("/withdrawal/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
-        return transactionService.deposit(id, withdrawal);
+        return transactionService.withdrawal(id, withdrawal);
     }
 
     @GetMapping("/credit-card/{id}")
