@@ -1,11 +1,8 @@
 package com.banksystem.banksystemappApp;
 
 import com.banksystem.banksystemappApp.enums.AccountType;
-import com.banksystem.banksystemappApp.models.accounts.CreditCard;
-import com.banksystem.banksystemappApp.models.accounts.Savings;
-import com.banksystem.banksystemappApp.models.accounts.StudentChecking;
+import com.banksystem.banksystemappApp.models.accounts.*;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
-import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.users.Address;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CreditCardRepository;
@@ -100,6 +97,8 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		ThirdParty thirdParty = new ThirdParty("Third-Party-0001","12345679");
 		thirdPartyRepository.save(thirdParty);
+
+		Checking thirdPartyAccount = new Checking(new BigDecimal("0"),12345679L,null,null,AccountType.CHECKING);
 
 
 

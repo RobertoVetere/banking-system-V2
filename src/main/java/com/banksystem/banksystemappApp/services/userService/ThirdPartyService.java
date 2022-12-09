@@ -20,7 +20,6 @@ public class ThirdPartyService {
         return thirdPartyRepository.findAll();
     }
 
-
     public ThirdParty addThirdParty(ThirdParty thirdParty) {
 
         return thirdPartyRepository.save(thirdParty);

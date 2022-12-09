@@ -1,6 +1,6 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
-import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.AccountDTO;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;

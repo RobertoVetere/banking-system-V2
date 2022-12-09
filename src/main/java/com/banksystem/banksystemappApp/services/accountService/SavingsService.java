@@ -1,11 +1,9 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
-import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.AccountDTO;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
-import com.banksystem.banksystemappApp.models.accounts.Checking;
 import com.banksystem.banksystemappApp.models.accounts.Savings;
-import com.banksystem.banksystemappApp.models.accounts.StudentChecking;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -45,26 +42,25 @@ public class SavingsService {
 
     public BigDecimal showSavingBalance(Long id, Long secretKey) {
 
-
         Savings account = savingsRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
         if (secretKey.equals(account.getSecretKey())){
 
-           // LocalDate date = LocalDate.();
+            LocalDate last = account.getCreatedDate();
+            LocalDate now= LocalDate.now();
+            Period period = Period.between ( last , now);
 
-            if (Period.between(account.getCreatedDate(), LocalDate.now()).getYears() > 1) {
-                //||Period.between(date, LocalDate.now()).getYears() < 1
+            int days = (period.getDays());
+
+            if (days > 365) {
+
                 account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
-
-                //Savings Savings = new Savings(account.getBalance(),account.getSecretKey(),account.getPrimaryOwner(),
-                  //      account.getSecondaryOwner(),account.getPenaltyFee(),AccountType.SAVINGS);
-
-                //BigDecimal interesProfit = account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate()));
+                savingsRepository.save(account);
             }
             return account.getBalance();
         }
-            return null;
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
         }
 
         public void deleteSaving(Long id){savingsRepository.deleteById(id);}

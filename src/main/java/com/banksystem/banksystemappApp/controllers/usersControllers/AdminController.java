@@ -1,16 +1,14 @@
 package com.banksystem.banksystemappApp.controllers.usersControllers;
 
-import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.AccountDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
-import com.banksystem.banksystemappApp.models.users.Admin;
 
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.services.accountService.AccountService;
 import com.banksystem.banksystemappApp.services.accountService.CheckingService;
 import com.banksystem.banksystemappApp.services.accountService.CreditCardService;
 import com.banksystem.banksystemappApp.services.accountService.SavingsService;
-import com.banksystem.banksystemappApp.services.userService.AdminService;
 import com.banksystem.banksystemappApp.services.userService.ThirdPartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

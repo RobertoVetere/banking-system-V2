@@ -1,4 +1,4 @@
-package com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs;
+package com.banksystem.banksystemappApp.controllers.DTO;
 
 import java.math.BigDecimal;
 

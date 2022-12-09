@@ -1,4 +1,4 @@
-package com.banksystem.banksystemappApp.controllers.transactionDTO;
+package com.banksystem.banksystemappApp.controllers.DTO;
 
 import jakarta.annotation.Nullable;
 

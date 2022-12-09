@@ -1,12 +1,11 @@
 package com.banksystem.banksystemappApp.controllers.usersControllers;
-import com.banksystem.banksystemappApp.controllers.accountsControllers.DTOs.AccountDTO;
-import com.banksystem.banksystemappApp.controllers.transactionDTO.TransactionDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
-import com.banksystem.banksystemappApp.models.accounts.Savings;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.services.TransactionService;
 import com.banksystem.banksystemappApp.services.accountService.AccountService;
+import com.banksystem.banksystemappApp.services.accountService.CreditCardService;
 import com.banksystem.banksystemappApp.services.accountService.SavingsService;
 import com.banksystem.banksystemappApp.services.userService.AccountHolderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,9 @@ public class AccountHolderController {
 
     @Autowired
     SavingsService  savingsService;
+
+    @Autowired
+    CreditCardService  creditCardService;
 
 
     @GetMapping("/all")
@@ -67,5 +69,11 @@ public class AccountHolderController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
         return transactionService.deposit(id, withdrawal);
+    }
+
+    @GetMapping("/credit-card/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal getCreditCardBalance(@PathVariable Long id, @RequestParam Long secretKey){
+        return creditCardService.showCreditCardBalance(id , secretKey);
     }
 }
