@@ -51,6 +51,17 @@ public class SavingsService {
             LocalDate now= LocalDate.now();
             Period period = Period.between ( last , now);
 
+            /*
+            LocalDate nextInterestPayment = last.withYear(now.getYear());
+
+            if (nextInterestPayment.isBefore(last) || nextInterestPayment.isEqual(last)) {
+
+                account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
+                savingsRepository.save(account);
+            }
+
+             */
+
             int days = (period.getDays());
 
             if (days > 365) {
