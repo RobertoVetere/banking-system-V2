@@ -10,6 +10,7 @@ public class ThirdParty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
     @Column(name = "Password")
     private String hashedKey;

@@ -17,6 +17,8 @@ public class AccountHolderDTO {
 
     private String name;
 
+    private String userName;
+
     private String password;
 
     private LocalDate dateOfBirth;
@@ -33,12 +35,21 @@ public class AccountHolderDTO {
 
     private Address primaryAddress;
 
-    public AccountHolderDTO(String name, String password, LocalDate dateOfBirth, Address mailingAddress, Address primaryAddress) {
+    public AccountHolderDTO(String name, String userName, String password, LocalDate dateOfBirth, Address mailingAddress, Address primaryAddress) {
         this.name = name;
+        this.userName = userName;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.mailingAddress = mailingAddress;
         this.primaryAddress = primaryAddress;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {

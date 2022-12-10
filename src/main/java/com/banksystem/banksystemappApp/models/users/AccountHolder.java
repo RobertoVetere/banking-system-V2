@@ -48,13 +48,13 @@ public class AccountHolder extends User {
     public AccountHolder() {
     }
 
-    public AccountHolder(String name, String password, LocalDate dateOfBirth, Address mailingAddress, Address primaryAddress) {
-        super(name, password);
+
+    public AccountHolder(String name, String userName, String password, LocalDate dateOfBirth, Address mailingAddress, Address primaryAddress) {
+        super(name, userName, password);
         this.dateOfBirth = dateOfBirth;
         this.mailingAddress = mailingAddress;
         this.primaryAddress = primaryAddress;
     }
-
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;

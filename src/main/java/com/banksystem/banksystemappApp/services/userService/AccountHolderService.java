@@ -37,7 +37,7 @@ public class AccountHolderService {
 
     public AccountHolder addAccountHolder(AccountHolderDTO accountHolderDTO) {
 
-        AccountHolder accountHolder = new AccountHolder(accountHolderDTO.getName(),accountHolderDTO.getPassword(),accountHolderDTO.getDateOfBirth(),
+        AccountHolder accountHolder = new AccountHolder(accountHolderDTO.getName(),accountHolderDTO.getUserName(),accountHolderDTO.getPassword(),accountHolderDTO.getDateOfBirth(),
                 accountHolderDTO.getMailingAddress(),accountHolderDTO.getPrimaryAddress());
 
         String encodedPassword = passwordEncoder.encode(accountHolder.getPassword());

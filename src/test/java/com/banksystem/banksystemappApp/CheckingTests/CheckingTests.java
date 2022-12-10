@@ -32,11 +32,11 @@ public class CheckingTests {
 
     @BeforeEach
     void setUp(){
-        AccountHolder primaryOwner = new AccountHolder("Marta Perez", "1234",LocalDate.of(1985, 1, 8),
+        AccountHolder primaryOwner = new AccountHolder("Marta Perez","user1", "1234",LocalDate.of(1985, 1, 8),
                 new Address("carrer Sant Andrew",8030,"Madrid","Spain"),
                 new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-        AccountHolder secondaryOwner2 = new AccountHolder("Roberto Vetere","1234",LocalDate.of(1985, 9, 21),
+        AccountHolder secondaryOwner2 = new AccountHolder("Roberto Vetere","user2","1234",LocalDate.of(1985, 9, 21),
                 new Address("carrer la nada",28850,"Madrid","Spain"),
                 new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner2));
