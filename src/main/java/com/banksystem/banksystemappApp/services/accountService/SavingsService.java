@@ -39,6 +39,8 @@ public class SavingsService {
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
         AccountHolder secondaryOwner = null;
+        if(accountDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(accountDTO.getSecondaryOwnerId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
             Account saving = new Savings(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner,AccountType.SAVINGS);
 

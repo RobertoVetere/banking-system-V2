@@ -10,6 +10,8 @@ import com.banksystem.banksystemappApp.services.accountService.SavingsService;
 import com.banksystem.banksystemappApp.services.userService.AccountHolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -45,8 +47,8 @@ public class AccountHolderController {
 
     @GetMapping("/balance/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getAccounBalance(@PathVariable Long id, @RequestParam String secretKey){
-        return accountService.showAccountBalance(id , secretKey);
+    public BigDecimal getAccounBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id){
+        return accountService.showAccountBalance(userDetails , id);
     }
 
     @PostMapping("/transfer")

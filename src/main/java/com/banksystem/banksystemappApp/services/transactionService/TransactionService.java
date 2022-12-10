@@ -28,36 +28,50 @@ public class TransactionService {
 
     public Transaction makeTransfer(TransactionDTO transactionDTO) {
 
+
         Account transactionOwner = accountRepository.findByAccountNumber(transactionDTO.getTransactionOwnerAccountNumber());
 
         Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
 
+/*
         if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
                 & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())
                 ||
                 targetAccount.getSecondaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
                         & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
 
-                if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) < 0) {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
-                } else {
-                    transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
-                    targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
 
+ */      if (transactionDTO.getTransactionOwnerAccountNumber().equals(transactionOwner.getAccountNumber())){
 
-                    accountRepository.saveAll(List.of(transactionOwner, targetAccount));
+             if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) > 0) {
 
-                    Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                            transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
-                    return transactionRepository.save(transaction);
-                }
+                transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
+                 targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
+
+                 accountRepository.saveAll(List.of(transactionOwner, targetAccount));
+
+                 Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
+                         transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
+
+                return transactionRepository.save(transaction);
+
+            } else {
+
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
             }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "INCORRECT ACCOUNT");
+            }
+/*
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
     }
+
+         */
 
     public Account deposit(Long id, BigDecimal deposit) {
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
 
         account.setBalance(account.getBalance().add(deposit));
 

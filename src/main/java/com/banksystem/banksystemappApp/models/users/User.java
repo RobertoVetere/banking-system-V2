@@ -20,15 +20,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-
-    @Column(unique = true)
-    private String userName;
 
     private String password;
 
+    private String name;
 
+    @Column(unique = true)
+    private String userName;
 
     @ManyToOne
     @JoinColumn(name = "bank")

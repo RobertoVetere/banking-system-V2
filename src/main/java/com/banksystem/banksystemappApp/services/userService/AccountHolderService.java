@@ -9,9 +9,11 @@ import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.Role;
 import com.banksystem.banksystemappApp.models.users.User;
 import com.banksystem.banksystemappApp.repositories.securityRepository.RoleRepository;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,13 +33,18 @@ public class AccountHolderService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<AccountHolder> findAllAccountHolders() {
         return accountHolderRepository.findAll();
     }
 
 
 
-    public AccountHolder addAccountHolder(AccountHolderDTO accountHolderDTO) {
+    public AccountHolder addAccountHolder(UserDetails userDetails , AccountHolderDTO accountHolderDTO) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         Optional<AccountHolder> accountHolderValidate = accountHolderRepository.findByUserName(accountHolderDTO.getUserName());
 

@@ -31,6 +31,7 @@ public class SecurityConfiguration {
 
        //httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
         httpSecurity.authorizeHttpRequests()
+
                 .requestMatchers(HttpMethod.GET, "/account-holder/balance/{id}").hasRole("ACCOUNTHOLDER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/transfer").hasRole("ACCOUNTHOLDER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/savings-balance/{id}").hasRole("ACCOUNTHOLDER")
@@ -38,8 +39,10 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/account-holder/withdrawal/{id}").hasRole("ACCOUNTHOLDER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/credit-card/{id}").hasRole("ACCOUNTHOLDER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/all").hasRole("ACCOUNTHOLDER")
+
+
                 .requestMatchers(HttpMethod.GET, "/admin/checking-all").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/admin/create-profile").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/create-account-holder").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/admin/add-checking").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/admin/add-saving").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/admin/add-credit-card").hasRole("ADMIN")

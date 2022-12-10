@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class TransactionDTO {
 
     private String transactionOwnerAccountNumber;
-    @Nullable
+
     private String targetAccountNumber;
 
     private String targetOwnerName;

@@ -15,6 +15,8 @@ import com.banksystem.banksystemappApp.services.userService.AccountHolderService
 import com.banksystem.banksystemappApp.services.userService.ThirdPartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -51,13 +53,14 @@ public class AdminController {
 
     @PostMapping("/create-account-holder")
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountHolder addNewThirdParty(@RequestBody AccountHolderDTO accountHolderDTO) {
-        return accountHolderService.addAccountHolder(accountHolderDTO);
+    public AccountHolder addNewThirdParty(@AuthenticationPrincipal UserDetails userDetails,@RequestBody AccountHolderDTO accountHolderDTO) {
+        return accountHolderService.addAccountHolder(userDetails , accountHolderDTO);
     }
 
     @PostMapping("/add-checking")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account addNewChecking(@RequestBody AccountDTO checking) {return checkingService.addChecking(checking);
+    public Account addNewChecking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO checking) {
+        return checkingService.addChecking(userDetails, checking);
     }
 
     @PostMapping("/add-saving")

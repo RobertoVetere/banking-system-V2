@@ -9,9 +9,11 @@ import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CheckingRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.StudentCheckingRepository;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,12 +39,17 @@ public class CheckingService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<Checking> findAllCheckings() {
         return checkingRepository.findAll();
     }
 
 
-    public Account addChecking(AccountDTO accountDTO) {
+    public Account addChecking(UserDetails userDetails , AccountDTO accountDTO) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
@@ -71,6 +78,10 @@ public class CheckingService {
     }
 
     public void deleteChecking(Long id){
+
+        Account account = accountRepository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
         accountRepository.deleteById(id);
     }
 }
