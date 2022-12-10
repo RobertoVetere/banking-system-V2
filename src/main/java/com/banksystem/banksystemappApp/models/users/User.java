@@ -4,6 +4,7 @@ import com.banksystem.banksystemappApp.models.bank.Bank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.lang.NonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,12 +19,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
+
     private String name;
 
-    @Column(name = "user_name", nullable = false,unique = true)
+
+    @Column(unique = true)
     private String userName;
-    @Column(name = "name", nullable = false)
+
     private String password;
 
 

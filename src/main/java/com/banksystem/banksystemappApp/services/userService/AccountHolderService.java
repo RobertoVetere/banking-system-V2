@@ -16,7 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountHolderService {
@@ -37,8 +39,20 @@ public class AccountHolderService {
 
     public AccountHolder addAccountHolder(AccountHolderDTO accountHolderDTO) {
 
+        Optional<AccountHolder> accountHolderValidate = accountHolderRepository.findByUserName(accountHolderDTO.getUserName());
+
+        if (accountHolderValidate.isPresent()){
+
+            if (accountHolderValidate.get().getUserName().equals(accountHolderDTO.getUserName())){
+
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Sorry username already taken");
+            }
+
+        }
+
         AccountHolder accountHolder = new AccountHolder(accountHolderDTO.getName(),accountHolderDTO.getUserName(),accountHolderDTO.getPassword(),accountHolderDTO.getDateOfBirth(),
                 accountHolderDTO.getMailingAddress(),accountHolderDTO.getPrimaryAddress());
+
 
         String encodedPassword = passwordEncoder.encode(accountHolder.getPassword());
         accountHolder.setPassword(encodedPassword);
