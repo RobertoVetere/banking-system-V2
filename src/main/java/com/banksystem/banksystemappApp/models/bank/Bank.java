@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "bank")
 public class Bank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
+    private String name;
+
+    private String password;
 
     @OneToMany(mappedBy = "bank")
     @JsonIgnore
@@ -26,24 +32,32 @@ public class Bank {
     public Bank() {
     }
 
-    public Bank(List<User> userList, List<Account> accountList) {
-        this.userList = userList;
-        this.accountList = accountList;
+    public Bank(String name, String password) {
+        setName(name);
+        setPassword(password);
     }
 
-    public List<User> getUserListr() {
-        return userList;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserListr(List<User> userListr) {
-        this.userList = userListr;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public List<Account> getAccountList() {
-        return accountList;
+    public String getName() {
+        return name;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

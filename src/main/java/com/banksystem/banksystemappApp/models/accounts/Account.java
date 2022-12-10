@@ -4,6 +4,7 @@ import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.bank.Bank;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
+import com.banksystem.banksystemappApp.models.users.Admin;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -41,8 +42,13 @@ public abstract class Account {
     private AccountHolder secondaryOwner;
 
     @ManyToOne
+    @JoinColumn(name = "admin")
+    private Admin admin;
+
+    @ManyToOne
     @JoinColumn(name = "bank")
     private Bank bank;
+
 
     final BigDecimal penaltyFee = new BigDecimal("40.00");
 
