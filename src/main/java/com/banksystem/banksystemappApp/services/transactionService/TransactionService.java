@@ -1,11 +1,11 @@
-package com.banksystem.banksystemappApp.services;
+package com.banksystem.banksystemappApp.services.transactionService;
 
 import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyDTO;
 import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
-import com.banksystem.banksystemappApp.repositories.TransactionRepository;
+import com.banksystem.banksystemappApp.repositories.transactionRepository.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

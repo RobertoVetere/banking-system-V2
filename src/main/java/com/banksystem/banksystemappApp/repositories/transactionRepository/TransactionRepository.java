@@ -1,4 +1,4 @@
-package com.banksystem.banksystemappApp.repositories;
+package com.banksystem.banksystemappApp.repositories.transactionRepository;
 
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;

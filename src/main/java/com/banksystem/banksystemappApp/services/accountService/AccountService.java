@@ -1,7 +1,7 @@
 package com.banksystem.banksystemappApp.services.accountService;
 
 import com.banksystem.banksystemappApp.models.accounts.Account;
-import com.banksystem.banksystemappApp.repositories.TransactionRepository;
+import com.banksystem.banksystemappApp.repositories.transactionRepository.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
