@@ -1,5 +1,6 @@
 package com.banksystem.banksystemappApp.models.users;
 
+import com.banksystem.banksystemappApp.models.bank.Bank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -24,6 +25,10 @@ public class User {
     private String userName;
 
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "bank")
+    private Bank bank;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore

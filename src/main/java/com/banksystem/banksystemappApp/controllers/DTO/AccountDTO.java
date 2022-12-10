@@ -1,5 +1,7 @@
 package com.banksystem.banksystemappApp.controllers.DTO;
 
+import jakarta.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import static com.banksystem.banksystemappApp.models.RandomClass.randomAccountNumber;
@@ -13,9 +15,9 @@ public class AccountDTO {
     private BigDecimal balance;
 
     private String secretKey;
-
+    @Nullable
     private BigDecimal creditLimit;
-
+    @Nullable
     private BigDecimal interestRate;
 
     public AccountDTO(Long primaryOwnerId, Long secondaryOwnerId,
@@ -24,8 +26,8 @@ public class AccountDTO {
         this.secondaryOwnerId = secondaryOwnerId;
         this.balance = balance;
         this.secretKey = secretKey;
-        this.creditLimit = creditLimit;
-        this.interestRate = interestRate;
+        setCreditLimit(creditLimit);
+        setInterestRate(interestRate);
     }
 
     public Long getPrimaryOwnerId() {

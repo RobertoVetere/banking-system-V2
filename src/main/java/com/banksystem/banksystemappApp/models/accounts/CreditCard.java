@@ -1,6 +1,7 @@
 package com.banksystem.banksystemappApp.models.accounts;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 
 import java.math.BigDecimal;
@@ -8,9 +9,9 @@ import java.util.Objects;
 
 @Entity
 public class CreditCard extends Account {
-
+        @Nullable
         private BigDecimal creditLimit = new BigDecimal("100");
-
+        @Nullable
         private BigDecimal interestRate = new BigDecimal("0.20");
 
 

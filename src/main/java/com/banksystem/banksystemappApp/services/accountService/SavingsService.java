@@ -10,6 +10,7 @@ import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsR
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,6 +30,9 @@ public class SavingsService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
 
     public Account addSaving(AccountDTO accountDTO) {
 
@@ -37,6 +41,11 @@ public class SavingsService {
         AccountHolder secondaryOwner = null;
 
             Account saving = new Savings(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner,AccountType.SAVINGS);
+
+            String encodedPassword = passwordEncoder.encode(saving.getSecretKey());
+            saving.setSecretKey(encodedPassword);
+            saving = accountRepository.save(saving);
+
             return accountRepository.save(saving);
     }
 

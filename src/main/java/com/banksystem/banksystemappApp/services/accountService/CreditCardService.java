@@ -11,6 +11,7 @@ import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHold
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,6 +32,9 @@ public class CreditCardService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public List<CreditCard> findAllCreditCard() {
         return creditCardRepository.findAll();
     }
@@ -47,6 +51,11 @@ public class CreditCardService {
 
         Account creditCard = new CreditCard(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, null,
                 accountDTO.getCreditLimit(),accountDTO.getInterestRate(), AccountType.CREDITCARD);
+
+        String encodedPassword = passwordEncoder.encode(creditCard.getSecretKey());
+        creditCard.setSecretKey(encodedPassword);
+        creditCard = accountRepository.save(creditCard);
+
         return accountRepository.save(creditCard);
     }
 

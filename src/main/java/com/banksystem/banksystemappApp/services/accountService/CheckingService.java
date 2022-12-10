@@ -12,6 +12,7 @@ import com.banksystem.banksystemappApp.repositories.accountRepositories.StudentC
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,6 +34,9 @@ public class CheckingService {
     @Autowired
     AccountHolderRepository accountHolderRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public List<Checking> findAllCheckings() {
         return checkingRepository.findAll();
     }
@@ -48,10 +52,20 @@ public class CheckingService {
 
         if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
             Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.STUDENTCHECKING);
+
+            String encodedPassword = passwordEncoder.encode(studentChecking.getSecretKey());
+            studentChecking.setSecretKey(encodedPassword);
+            studentChecking = accountRepository.save(studentChecking);
+
             return accountRepository.save(studentChecking);
 
         }else{
             Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.CHECKING);
+
+            String encodedPassword = passwordEncoder.encode(Checking.getSecretKey());
+            Checking.setSecretKey(encodedPassword);
+            Checking = accountRepository.save(Checking);
+
             return accountRepository.save(Checking);
         }
     }
