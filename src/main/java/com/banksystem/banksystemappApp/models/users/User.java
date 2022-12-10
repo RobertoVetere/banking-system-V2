@@ -18,13 +18,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "user_name", nullable = false,unique = true)
     private String userName;
-
+    @Column(name = "name", nullable = false)
     private String password;
+
+
 
     @ManyToOne
     @JoinColumn(name = "bank")
@@ -39,18 +41,11 @@ public class User {
 
 
     public User(String name, String userName, String password) {
-        this.name = name;
-        this.userName = userName;
-        this.password = password;
+        setName(name);
+        setUserName(userName);
+        setPassword(password);
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public Long getId() {
         return id;
@@ -68,6 +63,14 @@ public class User {
         this.name = name;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -75,6 +78,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public Set<Role> getRoles() {
         return roles;
@@ -89,8 +93,9 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && name.equals(user.name) && password.equals(user.password) && roles.equals(user.roles);
+        return id.equals(user.id) && name.equals(user.name) && userName.equals(user.userName) && password.equals(user.password) && bank.equals(user.bank) && roles.equals(user.roles);
     }
+
 
     @Override
     public int hashCode() {
@@ -102,7 +107,9 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", bank=" + bank +
                 ", roles=" + roles +
                 '}';
     }

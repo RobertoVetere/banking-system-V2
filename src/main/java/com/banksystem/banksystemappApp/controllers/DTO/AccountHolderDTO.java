@@ -10,13 +10,14 @@ import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
 public class AccountHolderDTO {
 
     private String name;
-
+    @NonNull
     private String userName;
 
     private String password;

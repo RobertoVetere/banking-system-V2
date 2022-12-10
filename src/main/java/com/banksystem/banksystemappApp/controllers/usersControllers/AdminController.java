@@ -49,7 +49,7 @@ public class AdminController {
     public List<Checking> findAllCheckings(){return checkingService.findAllCheckings();
     }
 
-    @PostMapping("/create-profile")
+    @PostMapping("/create-account-holder")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountHolder addNewThirdParty(@RequestBody AccountHolderDTO accountHolderDTO) {
         return accountHolderService.addAccountHolder(accountHolderDTO);
