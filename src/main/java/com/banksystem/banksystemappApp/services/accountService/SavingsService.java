@@ -40,7 +40,7 @@ public class SavingsService {
             return accountRepository.save(saving);
     }
 
-    public BigDecimal showSavingBalance(Long id, Long secretKey) {
+    public BigDecimal showSavingBalance(Long id, String secretKey) {
 
         Savings account = savingsRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));

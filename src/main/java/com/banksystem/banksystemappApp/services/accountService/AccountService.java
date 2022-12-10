@@ -26,14 +26,19 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public BigDecimal showAccountBalance(Long id, Long secretKey) {
+    public BigDecimal showAccountBalance(Long id, String secretKey) {
+
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        if (secretKey.equals(account.getSecretKey())){
+        if (account.getSecretKey().equals(secretKey)){
+
             return account.getBalance();
-        }
+
+        }else{
+
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
+        }
     }
 
 }
