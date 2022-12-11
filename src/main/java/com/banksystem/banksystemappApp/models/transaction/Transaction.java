@@ -26,14 +26,14 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "transaction_owner")
     private Account transactionOwner;
+    private String targetOwnerName;
+
+    private BigDecimal amount;
 
     @ManyToOne
     @JoinColumn(name = "target_account")
     private Account targetAccount;
 
-    private String targetOwnerName;
-
-    private BigDecimal amount;
 
     private LocalDate initiationDate = LocalDate.now();
     @Enumerated(EnumType.STRING)

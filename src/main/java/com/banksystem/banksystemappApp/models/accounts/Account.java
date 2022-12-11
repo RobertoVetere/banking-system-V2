@@ -33,6 +33,7 @@ public abstract class Account {
     private BigDecimal balance;
 
     private String secretKey;
+    final BigDecimal penaltyFee = new BigDecimal("40.00");
     @ManyToOne
     @JoinColumn(name = "primary_owner")
     private AccountHolder primaryOwner;
@@ -41,16 +42,9 @@ public abstract class Account {
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;
 
-    //@ManyToOne
-    //@JoinColumn(name = "admin")
-    //private Admin admin;
-
     @ManyToOne
     @JoinColumn(name = "bank")
     private Bank bank;
-
-
-    final BigDecimal penaltyFee = new BigDecimal("40.00");
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate createdDate = LocalDate.now();

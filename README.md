@@ -87,7 +87,7 @@ Fill in the Admin and User credentials in the "Authorization" tab in Postman to 
 
    ![Check Balance](screenshots/Showaccountbalance.PNG)
 
-
+![Check Balance](screenshots/BankSystemUML.PNG)
 
 ### Author
 <li><a href="https://github.com/RobertoVetere">Roberto Vetere</a></li>
