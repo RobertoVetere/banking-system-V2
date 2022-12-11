@@ -44,7 +44,7 @@ Import the "postman end points collection" file into the application.
 2. Create admin account
    >The admin account will allow you to create accounts as well as users. Remember their password :)
    > 
-![Create Account](screenshots/CreateNewAdmin.PNG)
+   ![Create Account](screenshots/CreateNewAdmin.PNG)
 
 2. Create new account holder
    >Fill in the requested fields to create a new account holder. Remember that each account has a Primary Owner and an optional SecondaryOwner.
