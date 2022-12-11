@@ -65,33 +65,35 @@ public class AdminController {
 
     @PostMapping("/add-saving")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account addNewSaving(@RequestBody AccountDTO saving) {return savingsService.addSaving(saving);
+    public Account addNewSaving(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO saving) {
+        return savingsService.addSaving( userDetails , saving);
     }
 
     @PostMapping("/add-credit-card")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account addNewCreditCard(@RequestBody AccountDTO creditCard) {return creditCardService.addCreditCard(creditCard);
+    public Account addNewCreditCard(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO creditCard) {
+        return creditCardService.addCreditCard(userDetails , creditCard);
     }
 
 
     @PatchMapping("/update-balance/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
-        return accountService.updateAccountBalance(id, balance);
+    public Account updateAccountBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal balance){
+        return accountService.updateAccountBalance(userDetails , id, balance);
     }
 
 
 
     @PostMapping("/add-third-party")
     @ResponseStatus(HttpStatus.CREATED)
-    public ThirdParty addNewThirdParty(@RequestBody ThirdParty thirdParty) {
-        return thirdPartyService.addThirdParty(thirdParty);
+    public ThirdParty addNewThirdParty(@AuthenticationPrincipal UserDetails userDetails, @RequestBody ThirdParty thirdParty) {
+        return thirdPartyService.addThirdParty(userDetails , thirdParty);
     }
 
     @DeleteMapping("/delete-checking/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable("id") Long id) {
-        checkingService.deleteChecking(id);
+    public void deleteProduct(@AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
+        checkingService.deleteChecking(userDetails , id);
     }
 
 

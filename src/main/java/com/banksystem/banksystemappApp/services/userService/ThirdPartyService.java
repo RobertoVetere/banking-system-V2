@@ -6,9 +6,11 @@ import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.Role;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.repositories.securityRepository.RoleRepository;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.ThirdPartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,20 +31,25 @@ public class ThirdPartyService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<ThirdParty> findAllThirdParty() {
         return thirdPartyRepository.findAll();
     }
 
-    public ThirdParty addThirdParty(ThirdParty thirdParty) {
+    public ThirdParty addThirdParty(UserDetails userDetails , ThirdParty thirdParty) {
 
-        Optional<ThirdParty> accountHolderValidate = thirdPartyRepository.findByName(thirdParty.getName());
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
-        if (accountHolderValidate.isPresent()){
+            Optional<ThirdParty> accountHolderValidate = thirdPartyRepository.findByName(thirdParty.getName());
 
-            if (accountHolderValidate.get().getName().equals(thirdParty.getName())){
+                if (accountHolderValidate.isPresent()){
 
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Sorry username already taken");
-            }
+                    if (accountHolderValidate.get().getName().equals(thirdParty.getName())){
+
+                        throw new ResponseStatusException(HttpStatus.CONFLICT, "Sorry username already taken");
+                    }
         }
 
         String encodedPassword = passwordEncoder.encode(thirdParty.getHashedKey());

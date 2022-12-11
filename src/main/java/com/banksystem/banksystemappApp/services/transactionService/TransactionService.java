@@ -5,10 +5,12 @@ import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.transactionRepository.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,10 +26,13 @@ public class TransactionService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    UserRepository userRepository;
 
 
-    public Transaction makeTransfer(TransactionDTO transactionDTO) {
+    public Transaction makeTransfer(UserDetails userDetails , TransactionDTO transactionDTO) {
 
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         Account transactionOwner = accountRepository.findByAccountNumber(transactionDTO.getTransactionOwnerAccountNumber());
 
@@ -68,7 +73,10 @@ public class TransactionService {
 
          */
 
-    public Account deposit(Long id, BigDecimal deposit) {
+    public Account deposit(UserDetails userDetails , Long id, BigDecimal deposit) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
+
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
@@ -81,7 +89,10 @@ public class TransactionService {
         return accountRepository.save(account);
     }
 
-    public Account withdrawal(Long id, BigDecimal withdrawal) {
+    public Account withdrawal(UserDetails userDetails , Long id, BigDecimal withdrawal) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
+
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 

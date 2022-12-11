@@ -7,9 +7,11 @@ import com.banksystem.banksystemappApp.models.accounts.Savings;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,8 +35,13 @@ public class SavingsService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    UserRepository userRepository;
 
-    public Account addSaving(AccountDTO accountDTO) {
+
+    public Account addSaving(UserDetails userDetails , AccountDTO accountDTO) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
@@ -51,7 +58,9 @@ public class SavingsService {
             return accountRepository.save(saving);
     }
 
-    public BigDecimal showSavingBalance(Long id, String secretKey) {
+    public BigDecimal showSavingBalance(UserDetails userDetails , Long id, String secretKey) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         Savings account = savingsRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));

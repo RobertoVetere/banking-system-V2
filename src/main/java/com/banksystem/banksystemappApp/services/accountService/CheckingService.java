@@ -77,7 +77,9 @@ public class CheckingService {
         }
     }
 
-    public void deleteChecking(Long id){
+    public void deleteChecking(UserDetails userDetails , Long id){
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         Account account = accountRepository.findById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));

@@ -53,31 +53,31 @@ public class AccountHolderController {
 
     @PostMapping("/transfer")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Transaction makeTransfer(@RequestBody TransactionDTO transactionDTO) {
-        return transactionService.makeTransfer(transactionDTO);
+    public Transaction makeTransfer(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TransactionDTO transactionDTO) {
+        return transactionService.makeTransfer(userDetails , transactionDTO);
     }
 
     @GetMapping("/savings-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getSavingBalance(@PathVariable Long id, @RequestParam String secretKey){
-        return savingsService.showSavingBalance(id , secretKey);
+    public BigDecimal getSavingBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey){
+        return savingsService.showSavingBalance(userDetails, id , secretKey);
     }
 
     @PatchMapping("/deposit/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account deposit(@PathVariable Long id, @RequestParam BigDecimal deposit){
-        return transactionService.deposit(id, deposit);
+    public Account deposit(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal deposit){
+        return transactionService.deposit(userDetails , id, deposit);
     }
 
     @PatchMapping("/withdrawal/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account withdrawal(@PathVariable Long id, @RequestParam BigDecimal withdrawal){
-        return transactionService.withdrawal(id, withdrawal);
+    public Account withdrawal(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal withdrawal){
+        return transactionService.withdrawal(userDetails , id, withdrawal);
     }
 
     @GetMapping("/credit-card/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getCreditCardBalance(@PathVariable Long id, @RequestParam Long secretKey){
-        return creditCardService.showCreditCardBalance(id , secretKey);
+    public BigDecimal getCreditCardBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam Long secretKey){
+        return creditCardService.showCreditCardBalance(userDetails ,id , secretKey);
     }
 }

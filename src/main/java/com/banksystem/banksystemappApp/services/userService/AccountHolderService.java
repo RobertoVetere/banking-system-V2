@@ -64,7 +64,7 @@ public class AccountHolderService {
         String encodedPassword = passwordEncoder.encode(accountHolder.getPassword());
         accountHolder.setPassword(encodedPassword);
         accountHolder = accountHolderRepository.save(accountHolder);
-        Role role = roleRepository.save(new Role("ACCOUNTHOLDER", accountHolder));
+        Role role = roleRepository.save(new Role("USER", accountHolder));
 
         return accountHolderRepository.save(accountHolder);
     }

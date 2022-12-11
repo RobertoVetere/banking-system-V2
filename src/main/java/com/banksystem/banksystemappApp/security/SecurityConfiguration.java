@@ -31,14 +31,14 @@ public class SecurityConfiguration {
 
        //httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
         httpSecurity.authorizeHttpRequests()
-/*
-                .requestMatchers(HttpMethod.GET, "/account-holder/balance/{id}").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/transfer").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/savings-balance/{id}").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/deposit/{id}").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/withdrawal/{id}").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/credit-card/{id}").hasRole("ACCOUNTHOLDER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/all").hasRole("ACCOUNTHOLDER")
+
+                .requestMatchers(HttpMethod.GET, "/account-holder/balance/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/transfer").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/savings-balance/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/deposit/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/withdrawal/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/credit-card/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/account-holder/all").hasRole("USER")
 
 
 
@@ -57,7 +57,6 @@ public class SecurityConfiguration {
                  //.requestMatchers(HttpMethod.GET, "/user-admin-area**").hasRole("ADMIN")
               //  .requestMatchers(HttpMethod.GET, "/user-details").hasAnyRole("ADMIN", "USER")
 
- */
                 .anyRequest().permitAll();
 
         httpSecurity.csrf().disable();

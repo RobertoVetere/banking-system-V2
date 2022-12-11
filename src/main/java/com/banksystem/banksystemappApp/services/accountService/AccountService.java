@@ -25,7 +25,10 @@ public class AccountService {
     @Autowired
     UserRepository userRepository;
 
-    public Account updateAccountBalance(Long id, BigDecimal balance) {
+    public Account updateAccountBalance(UserDetails userDetails ,Long id, BigDecimal balance) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
+
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
         account.setBalance(balance);
@@ -39,6 +42,7 @@ public class AccountService {
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
             return account.getBalance();
+
 /*
         if (account.getSecretKey().equals(secretKey)){
 

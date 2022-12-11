@@ -7,10 +7,12 @@ import com.banksystem.banksystemappApp.models.accounts.CreditCard;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CreditCardRepository;
+import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,6 +37,9 @@ public class CreditCardService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<CreditCard> findAllCreditCard() {
         return creditCardRepository.findAll();
     }
@@ -43,7 +48,9 @@ public class CreditCardService {
         return creditCardRepository.save(creditCard);
     }
 
-    public Account addCreditCard(AccountDTO accountDTO) {
+    public Account addCreditCard(UserDetails userDetails, AccountDTO accountDTO) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
@@ -59,7 +66,10 @@ public class CreditCardService {
         return accountRepository.save(creditCard);
     }
 
-    public BigDecimal showCreditCardBalance(Long id, Long secretKey) {
+    public BigDecimal showCreditCardBalance(UserDetails userDetails , Long id, Long secretKey) {
+
+        userRepository.findByUserName(userDetails.getUsername()).get();
+
         CreditCard account = creditCardRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
@@ -69,7 +79,11 @@ public class CreditCardService {
         Period period = Period.between ( last , now);
 
 
+
+
         int days = (period.getDays());
+
+
 
         if (secretKey.equals(account.getSecretKey())){
             if (days > 31){
