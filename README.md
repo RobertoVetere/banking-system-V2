@@ -92,7 +92,7 @@ Fill in the Admin and User credentials in the "Authorization" tab in Postman to 
 ### UML Class Diagram
    >A diagram showing the initial approach to the Rest API.
 
-   ![uml](screenshots/banksystemrefactor.png)
+   ![uml](diagram/banksystemrefactor.png)
 
 ### Author
 <li><a href="https://github.com/RobertoVetere">Roberto Vetere</a></li>
