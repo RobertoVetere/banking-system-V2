@@ -11,7 +11,7 @@ localhost:8080/
 ```
 Remember to change the password in application.properties
 
-![Properties](screenshots/properties.PNG)
+![Create Account](screenshots/properties.PNG)
 
 The database is included in the "dataBase" folder of the project under the name "banksystem".
 For convenience it includes some examples of accounts and users ready for testing.
