@@ -5,10 +5,13 @@ import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Savings;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
+import com.banksystem.banksystemappApp.models.users.User;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
+import com.banksystem.banksystemappApp.utilMethod.UtilMethod;
+import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +41,8 @@ public class SavingsService {
     @Autowired
     UserRepository userRepository;
 
+    UtilMethod utilMethod;
+
 
     public Account addSaving(UserDetails userDetails , AccountDTO accountDTO) {
 
@@ -45,6 +50,7 @@ public class SavingsService {
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
+
         AccountHolder secondaryOwner = null;
         if(accountDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(accountDTO.getSecondaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
@@ -62,36 +68,45 @@ public class SavingsService {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
+        User holder = userRepository.findByUserName(userDetails.getUsername()).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
         Savings account = savingsRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        if (secretKey.equals(account.getSecretKey())){
+            //utilMethod.calculateInterestRate(account);
 
-            LocalDate last = account.getCreatedDate();
-            LocalDate now= LocalDate.now();
-            Period period = Period.between ( last , now);
+        if (holder.getUserName().equals(account.getPrimaryOwner().getUserName())){
 
-            /*
-            LocalDate nextInterestPayment = last.withYear(now.getYear());
+            if (account.getSecretKey().equals(secretKey)){
 
-            if (nextInterestPayment.isBefore(last) || nextInterestPayment.isEqual(last)) {
+                LocalDate now = LocalDate.now();
+                Period period = Period.between (account.getCreatedDate() , account.getCheckLastConnection());
 
-                account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
-                savingsRepository.save(account);
+
+                if (period.getDays() > 365 & period.getDays() <= 730) {
+
+                    account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
+                    savingsRepository.save(account);
+
+                }else {
+
+                    Period period2 = Period.between (now , account.getCheckLastConnection());
+
+                    if (period.getDays() > 365){
+
+                        account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
+                        savingsRepository.save(account);
+                    }
+                }
+
+                account.setCheckLastConnection(now);
             }
 
-             */
-
-            int days = (period.getDays());
-
-            if (days > 365) {
-
-                account.setBalance(account.getBalance().multiply(BigDecimal.valueOf(account.getInterestRate())));
-                savingsRepository.save(account);
-            }
             return account.getBalance();
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
+
         }
 
     }

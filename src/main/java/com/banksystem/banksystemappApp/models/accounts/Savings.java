@@ -3,6 +3,7 @@ import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.Entity;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,8 @@ public class Savings extends Account {
 
     private BigDecimal minimumBalance = new BigDecimal("1000.00");
     private Double interestRate = 0.0025;
+
+    private LocalDate checkLastConnection;
 
     public Savings() {
     }
@@ -24,6 +27,14 @@ public class Savings extends Account {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
+    }
+
+    public LocalDate getCheckLastConnection() {
+        return checkLastConnection;
+    }
+
+    public void setCheckLastConnection(LocalDate checkLastConnection) {
+        this.checkLastConnection = checkLastConnection;
     }
 
     @Override
