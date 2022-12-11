@@ -40,16 +40,17 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/account-holder/credit-card/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/all").hasRole("USER")
 
-
-
-                .requestMatchers(HttpMethod.GET, "/admin/checking-all").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/create-account-holder").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/add-checking").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/add-saving").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/add-credit-card").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/admin/checking-all/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/create-account-holder/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-checking/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-saving/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-credit-card/").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PATCH, "/admin/update-balance/{id}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/add-third-party").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/admin/add-third-party").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-third-party/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/admin/add-third-party/").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.PATCH, "/third-party/payment/").hasRole("THIRDPARTY")
+                .requestMatchers(HttpMethod.PATCH, "/third-party/receipts/").hasRole("THIRDPARTY")
 
 
 

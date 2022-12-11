@@ -2,7 +2,7 @@ package com.banksystem.banksystemappApp.controllers.DTO;
 
 import java.math.BigDecimal;
 
-public class ThirdPartyDTO {
+public class ThirdPartyTransactionDTO {
 
     private BigDecimal amount;
 
@@ -10,7 +10,7 @@ public class ThirdPartyDTO {
 
     private String secretKey;
 
-    public ThirdPartyDTO(BigDecimal amount, String accountNumber, String secretKey) {
+    public ThirdPartyTransactionDTO(BigDecimal amount, String accountNumber, String secretKey) {
         this.amount = amount;
         this.accountNumber = accountNumber;
         this.secretKey = secretKey;

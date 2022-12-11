@@ -86,7 +86,7 @@ public class AdminControllerTests {
     @Test
     @WithMockUser(username = "admin", password = "1234")
     void createThirdParty() throws Exception {
-        ThirdParty thirdParty = new ThirdParty("Datafono","123456789");
+        ThirdParty thirdParty = new ThirdParty("Datafono","thirdParty","123456789");
         String body = objectMapper.writeValueAsString(thirdParty);
         MvcResult result = mockMvc.perform(post("/admin/add-third-party/").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())

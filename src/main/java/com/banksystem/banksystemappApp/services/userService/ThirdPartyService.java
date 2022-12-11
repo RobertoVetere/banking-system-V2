@@ -52,10 +52,10 @@ public class ThirdPartyService {
                     }
         }
 
-        String encodedPassword = passwordEncoder.encode(thirdParty.getHashedKey());
-        thirdParty.setHashedKey(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(thirdParty.getPassword());
+        thirdParty.setPassword(encodedPassword);
         thirdParty = thirdPartyRepository.save(thirdParty);
-        //Role role = roleRepository.save(new Role("THIRDPARTY", thirdParty));
+        Role role = roleRepository.save(new Role("THIRDPARTY", thirdParty));
 
         return thirdPartyRepository.save(thirdParty);
     }

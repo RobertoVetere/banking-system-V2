@@ -1,11 +1,10 @@
 package com.banksystem.banksystemappApp.services.transactionService;
 
-import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyTransactionDTO;
 import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
-import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.transactionRepository.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
@@ -120,16 +119,16 @@ public class TransactionService {
 
     }
 
-    public Account thirdPartyPayment(ThirdPartyDTO thirdPartyDTO) {
+    public Account thirdPartyPayment(ThirdPartyTransactionDTO thirdPartyTransactionDTO) {
 
-        Account account = accountRepository.findByAccountNumber(thirdPartyDTO.getAccountNumber());
+        Account account = accountRepository.findByAccountNumber(thirdPartyTransactionDTO.getAccountNumber());
 
 
-        if (thirdPartyDTO.getSecretKey().equals(account.getSecretKey())){
+        if (thirdPartyTransactionDTO.getSecretKey().equals(account.getSecretKey())){
 
-            if (account.getBalance().compareTo(thirdPartyDTO.getAmount()) > 0){
+            if (account.getBalance().compareTo(thirdPartyTransactionDTO.getAmount()) > 0){
 
-                account.setBalance(account.getBalance().subtract(thirdPartyDTO.getAmount()));
+                account.setBalance(account.getBalance().subtract(thirdPartyTransactionDTO.getAmount()));
 
             }else {
 
@@ -143,20 +142,20 @@ public class TransactionService {
         }
 
 
-        Transaction transaction = new Transaction(account.getAccountNumber(),account,thirdPartyDTO.getAmount(), TransactionType.THIRD_PARTY_PAYMENT);
+        Transaction transaction = new Transaction(account.getAccountNumber(),account, thirdPartyTransactionDTO.getAmount(), TransactionType.THIRD_PARTY_PAYMENT);
         transactionRepository.save(transaction);
 
         return accountRepository.save(account);
     }
 
 
-    public Account thirdPartyReceipt(ThirdPartyDTO thirdPartyDTO) {
+    public Account thirdPartyReceipt(ThirdPartyTransactionDTO thirdPartyTransactionDTO) {
 
-        Account account = accountRepository.findByAccountNumber(thirdPartyDTO.getAccountNumber());
+        Account account = accountRepository.findByAccountNumber(thirdPartyTransactionDTO.getAccountNumber());
 
-                account.setBalance(account.getBalance().add(thirdPartyDTO.getAmount()));
+                account.setBalance(account.getBalance().add(thirdPartyTransactionDTO.getAmount()));
 
-        Transaction transaction = new Transaction(account.getAccountNumber(),account,thirdPartyDTO.getAmount(), TransactionType.THIRD_PARTY_RECEIPTS);
+        Transaction transaction = new Transaction(account.getAccountNumber(),account, thirdPartyTransactionDTO.getAmount(), TransactionType.THIRD_PARTY_RECEIPTS);
         transactionRepository.save(transaction);
 
         return accountRepository.save(account);

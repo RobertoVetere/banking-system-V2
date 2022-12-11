@@ -1,6 +1,6 @@
 package com.banksystem.banksystemappApp.controllers.usersControllers;
 
-import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyDTO;
+import com.banksystem.banksystemappApp.controllers.DTO.ThirdPartyTransactionDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.services.transactionService.TransactionService;
@@ -30,14 +30,14 @@ public class ThirdPartyController {
 
     @PatchMapping("/payment/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account payment(@RequestBody ThirdPartyDTO thirdPartyDTO){
-        return transactionService.thirdPartyPayment(thirdPartyDTO);
+    public Account payment(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO){
+        return transactionService.thirdPartyPayment(thirdPartyTransactionDTO);
     }
 
     @PatchMapping("/receipts/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account receipts(@RequestBody ThirdPartyDTO thirdPartyDTO){
-        return transactionService.thirdPartyReceipt(thirdPartyDTO);
+    public Account receipts(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO){
+        return transactionService.thirdPartyReceipt(thirdPartyTransactionDTO);
     }
 
 }
