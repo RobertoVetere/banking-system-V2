@@ -3,29 +3,40 @@
 
 
 # Spring boot REST API
-Example project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank
+Final bootcamp project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank.
+
+Technologies and Dependencies
+
+- MySQL Driver
+- Spring Data JPA
+- Spring Web
+- Spring Boot DevTools
+- Spring Security
+- Project lombok
 
 ## Running locally 
 ```
 localhost:8080/
 ```
 Remember to change the password in application.properties
+Some sample screenshots are available to help you test the api in Postman.
 
 ![Create Account](screenshots/properties.PNG)
 
 The database is included in the "dataBase" folder of the project under the name "banksystem".
+
 For convenience it includes some examples of accounts and users ready for testing.
+
+Routes are secured, passwords are encrypted when creating Accounts and Users. Remember them to be able to authorise requests in Postman.
 
 ## Testing
 Import the "postman end points collection" file into the application.
 
 ### How to test
 1. Create Bank
-   > Use create account API to create an account by providing a `bankName` and `ownerName`
+   > Use create account API to create an account by providing a `name` and `userName`
    >
    ![Create Account](screenshots/CreateBank.PNG)
-
-> Make sure to write down the `sortCode` and the `accountNumber` to proceed with other APIs
 
 2. Create admin account
    ![Create Account](screenshots/CreateNewAdmin.PNG)
@@ -33,9 +44,18 @@ Import the "postman end points collection" file into the application.
 2. Create new account holder
    >Use noted `accountNumber` as `targetAccountNo` and provide amount greater than zero to deposit cash into an account
 
-   ![Deposit cash](screenshots/deposit.png)
+   ![createAccountHolder](screenshots/CreateNewAccountHolder.PNG)
 
-3. Check Balance
+3. Choose an account type and fill in the details
+
+   ![newAccount](screenshots/CreateNewAccount.PNG)
+
+4. Delete Account
+   >Try the route to delete accounts
+
+   ![Check Balance](screenshots/DeleteAccount.PNG)
+
+5. Check Balance
    >Use noted `accountNumber` and `sortCode` to check account balance
 
    ![Check Balance](screenshots/check_balance.png)
@@ -51,7 +71,5 @@ Import the "postman end points collection" file into the application.
 
 
 
-### Extensions
-1. Use of persisted database
-2. Use of asynchronous programming backed by message queue for transactions
-3. Others mentioned throughout the code
+### Author
+<li><a href="https://github.com/RobertoVetere">Roberto Vetere</a></li>

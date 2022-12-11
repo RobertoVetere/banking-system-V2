@@ -74,7 +74,7 @@ public abstract class Account {
 
     public Account(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                    AccountHolder secondaryOwner,  AccountType accountType) {
-        this.balance = balance;
+        setBalance(balance);
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
@@ -127,7 +127,24 @@ public abstract class Account {
     }
 
     public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+
+        try{
+            BigDecimal zero = new BigDecimal("0.00");
+
+            if (balance.compareTo(zero) > 0) {
+
+                this.balance = balance;
+            }else{
+
+            throw new  IllegalArgumentException("balance doesn't must be zero");
+
+            }
+
+
+        }catch (IllegalArgumentException exception){
+
+            throw new  IllegalArgumentException("balance doesn't must be zero");
+        }
     }
 
     public String getSecretKey() {

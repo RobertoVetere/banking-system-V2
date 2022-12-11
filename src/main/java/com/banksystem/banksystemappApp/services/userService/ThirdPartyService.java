@@ -46,7 +46,7 @@ public class ThirdPartyService {
 
                 if (thirdPartyOptional.isPresent()){
 
-                    if (thirdPartyOptional.get().getName().equals(thirdParty.getName())){
+                    if (thirdPartyOptional.get().getUserName().equals(thirdParty.getUserName())){
 
                         throw new ResponseStatusException(HttpStatus.CONFLICT, "Sorry username already taken");
                     }
