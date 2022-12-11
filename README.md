@@ -1,6 +1,6 @@
 # Banking System 
+![cover](screenshots/bankofneverland.PNG)
 
-![Create Account](screenshots/bankofneverland.PNG)
 
 # Spring boot REST API
 Example project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank
@@ -11,7 +11,7 @@ localhost:8080/
 ```
 Remember to change the password in application.properties
 
-![Create Account](screenshots/properties.PNG)
+![Properties](screenshots/properties.PNG)
 
 The database is included in the "dataBase" folder of the project under the name "banksystem".
 For convenience it includes some examples of accounts and users ready for testing.
