@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class ThirdParty {
+public class ThirdParty extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
