@@ -7,6 +7,9 @@ Final bootcamp project demonstrating the use of Java and Spring-boot to build a 
 
 Technologies and Dependencies
 
+- Java 19
+- Spring Boot
+- Maven
 - MySQL Driver
 - Spring Data JPA
 - Spring Web
@@ -18,7 +21,7 @@ Technologies and Dependencies
 ```
 localhost:8080/
 ```
-Remember to change the password in application.properties
+Remember to change the password in application.properties.
 Some sample screenshots are available to help you test the api in Postman.
 
 ![Create Account](screenshots/properties.PNG)
@@ -39,14 +42,17 @@ Import the "postman end points collection" file into the application.
    ![Create Account](screenshots/CreateBank.PNG)
 
 2. Create admin account
-   ![Create Account](screenshots/CreateNewAdmin.PNG)
+   >The admin account will allow you to create accounts as well as users. Remember their password :)
+   > 
+![Create Account](screenshots/CreateNewAdmin.PNG)
 
 2. Create new account holder
-   >Use noted `accountNumber` as `targetAccountNo` and provide amount greater than zero to deposit cash into an account
+   >Fill in the requested fields to create a new account holder. Remember that each account has a Primary Owner and an optional SecondaryOwner.
 
    ![createAccountHolder](screenshots/CreateNewAccountHolder.PNG)
 
-3. Choose an account type and fill in the details
+3. Choose an account type and fill in the details. Account numbers are created randomly when an account is initiated and are unique.
+   >If your account holder is under 24 years of age, the system will automatically open a "Student Checking" account for you under different conditions.
 
    ![newAccount](screenshots/CreateNewAccount.PNG)
 
@@ -55,19 +61,20 @@ Import the "postman end points collection" file into the application.
 
    ![Check Balance](screenshots/DeleteAccount.PNG)
 
-5. Check Balance
-   >Use noted `accountNumber` and `sortCode` to check account balance
+5. Make a transaction
+   >Make sure to replace the account numbers with two that are created in the database together. Enter the credentials that allow the transaction.
 
-   ![Check Balance](screenshots/check_balance.png)
+   ![Check Balance](screenshots/Maketransfer.png)
 
-4. Withdraw Cash
-   >Use noted `accountNumber` and `sortCode` and `amount` grater than zero to withdraw cash from an account
+4. Withdraw
+   >Remember to select the id that corresponds to the correct user account in the request header.
 
    ![Withdraw cash](screenshots/withdraw.png)
 
 5. Check Balance again to verify withdrawal
+   >Verify the transaction through the corresponding route
 
-   ![Check Balance](screenshots/check_balance_2.png)
+   ![Check Balance](screenshots/Showaccountbalance.png)
 
 
 
