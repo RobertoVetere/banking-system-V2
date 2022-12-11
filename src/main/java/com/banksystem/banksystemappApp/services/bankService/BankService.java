@@ -60,6 +60,7 @@ public class BankService {
         newAdmin.setPassword(encodedPassword);
         newAdmin = adminRepository.save(newAdmin);
         Role role = roleRepository.save(new Role("ADMIN", newAdmin));
+        Role role2 = roleRepository.save(new Role("USER", newAdmin));
         return adminRepository.save(newAdmin);
 
     }
