@@ -64,17 +64,17 @@ Import the "postman end points collection" file into the application.
 5. Make a transaction
    >Make sure to replace the account numbers with two that are created in the database together. Enter the credentials that allow the transaction.
 
-   ![Check Balance](screenshots/Maketransfer.png)
+   ![Check Balance](screenshots/Maketransfer.PNG)
 
 4. Withdraw
    >Remember to select the id that corresponds to the correct user account in the request header.
 
-   ![Withdraw cash](screenshots/withdraw.png)
+   ![Withdraw cash](screenshots/withdraw.PNG)
 
 5. Check Balance again to verify withdrawal
    >Verify the transaction through the corresponding route
 
-   ![Check Balance](screenshots/Showaccountbalance.png)
+   ![Check Balance](screenshots/Showaccountbalance.PNG)
 
 
 
