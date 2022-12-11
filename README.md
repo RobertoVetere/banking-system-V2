@@ -18,8 +18,10 @@ Technologies and dependencies
 - Project lombok
 - SQL
 
-The system has 4 types of accounts, StudentChecking, Checking, Savings, and CreditCard. The system must have 3 types of Users: Admins, AccountHolders and ThirdParty.
-Admins can create new accounts. When creating a new account they can create Checking, Savings or CreditCard Accounts.
+The system has 4 types of accounts, StudentChecking, Checking, Savings, and CreditCard. 
+The system must have 3 types of Users: Admins, AccountHolders and ThirdParty.
+Admins can create new accounts. 
+When creating a new account they can create Checking, Savings or CreditCard Accounts.
 
 
 
