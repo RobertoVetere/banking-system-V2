@@ -39,8 +39,8 @@ public class TransactionService {
         Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
 
         if (userDetails.getUsername().equals(transactionOwner.getPrimaryOwner().getUserName()) ||
-
                 userDetails.getUsername().equals(transactionOwner.getSecondaryOwner().getUserName())){
+
                     if (transactionDTO.getTransactionOwnerAccountNumber().equals(transactionOwner.getAccountNumber())){
 
                         if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) > 0) {
@@ -119,12 +119,11 @@ public class TransactionService {
 
     }
 
-    public Account thirdPartyPayment(ThirdPartyTransactionDTO thirdPartyTransactionDTO) {
+    public Account thirdPartyPayment(ThirdPartyTransactionDTO thirdPartyTransactionDTO,String secretKey, String hashedKey) {
 
         Account account = accountRepository.findByAccountNumber(thirdPartyTransactionDTO.getAccountNumber());
 
-
-        if (thirdPartyTransactionDTO.getSecretKey().equals(account.getSecretKey())){
+        //if (account.getSecretKey().equals(secretKey)){
 
             if (account.getBalance().compareTo(thirdPartyTransactionDTO.getAmount()) > 0){
 
@@ -134,14 +133,14 @@ public class TransactionService {
 
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
             }
-
+/*
         }else{
 
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "¡UPS! Password Wrong");
 
         }
 
-
+ */
         Transaction transaction = new Transaction(account.getAccountNumber(),account, thirdPartyTransactionDTO.getAmount(), TransactionType.THIRD_PARTY_PAYMENT);
         transactionRepository.save(transaction);
 
@@ -149,7 +148,7 @@ public class TransactionService {
     }
 
 
-    public Account thirdPartyReceipt(ThirdPartyTransactionDTO thirdPartyTransactionDTO) {
+    public Account thirdPartyReceipt(ThirdPartyTransactionDTO thirdPartyTransactionDTO , String secretKey,String hashedKey) {
 
         Account account = accountRepository.findByAccountNumber(thirdPartyTransactionDTO.getAccountNumber());
 

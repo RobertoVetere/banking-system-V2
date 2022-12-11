@@ -42,21 +42,29 @@ public class ThirdPartyService {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
-            Optional<ThirdParty> accountHolderValidate = thirdPartyRepository.findByName(thirdParty.getName());
+            Optional<ThirdParty> thirdPartyOptional = thirdPartyRepository.findByName(thirdParty.getName());
 
-                if (accountHolderValidate.isPresent()){
+                if (thirdPartyOptional.isPresent()){
 
-                    if (accountHolderValidate.get().getName().equals(thirdParty.getName())){
+                    if (thirdPartyOptional.get().getName().equals(thirdParty.getName())){
 
                         throw new ResponseStatusException(HttpStatus.CONFLICT, "Sorry username already taken");
                     }
         }
 
-        String encodedPassword = passwordEncoder.encode(thirdParty.getPassword());
-        thirdParty.setPassword(encodedPassword);
-        thirdParty = thirdPartyRepository.save(thirdParty);
-        Role role = roleRepository.save(new Role("THIRDPARTY", thirdParty));
+                ThirdParty newThirdParty = new ThirdParty(thirdParty.getName(),thirdParty.getUserName(),thirdParty.getPassword(),thirdParty.getHashedKey());
 
-        return thirdPartyRepository.save(thirdParty);
+        String encodedPassword = passwordEncoder.encode(newThirdParty.getHashedKey());
+        newThirdParty.setHashedKey(encodedPassword);
+
+        String encodedPassword2 = passwordEncoder.encode(newThirdParty.getPassword());
+        newThirdParty.setPassword(encodedPassword2);
+        newThirdParty = thirdPartyRepository.save(newThirdParty);
+        Role role = roleRepository.save(new Role("THIRDPARTY", newThirdParty));
+
+        return thirdPartyRepository.save(newThirdParty);
     }
+
 }
+
+

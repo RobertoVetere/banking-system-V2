@@ -30,14 +30,14 @@ public class ThirdPartyController {
 
     @PatchMapping("/payment/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account payment(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO){
-        return transactionService.thirdPartyPayment(thirdPartyTransactionDTO);
+    public Account payment(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO,@RequestParam String secretKey, String hashedKey){
+        return transactionService.thirdPartyPayment(thirdPartyTransactionDTO, secretKey, hashedKey);
     }
 
     @PatchMapping("/receipts/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account receipts(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO){
-        return transactionService.thirdPartyReceipt(thirdPartyTransactionDTO);
+    public Account receipts(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO,@RequestParam String secretKey,String hashedKey){
+        return transactionService.thirdPartyReceipt(thirdPartyTransactionDTO, secretKey, hashedKey);
     }
 
 }

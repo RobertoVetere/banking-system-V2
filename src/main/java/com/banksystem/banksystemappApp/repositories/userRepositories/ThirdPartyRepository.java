@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface ThirdPartyRepository extends JpaRepository<ThirdParty,Long> {
 
     Optional<ThirdParty>  findByName (String userName);
+
+    Optional<ThirdParty>  findByUserName (String userName);
 }

@@ -49,8 +49,8 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/admin/add-third-party/").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/admin/add-third-party/").hasRole("ADMIN")
 
-                .requestMatchers(HttpMethod.PATCH, "/third-party/payment/").hasRole("THIRDPARTY")
-                .requestMatchers(HttpMethod.PATCH, "/third-party/receipts/").hasRole("THIRDPARTY")
+                .requestMatchers(HttpMethod.PATCH, "/third-party/payment").hasRole("THIRDPARTY")
+                .requestMatchers(HttpMethod.PATCH, "/third-party/receipts").hasRole("THIRDPARTY")
 
 
 

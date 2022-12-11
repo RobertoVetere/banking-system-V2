@@ -8,12 +8,12 @@ public class ThirdPartyTransactionDTO {
 
     private String accountNumber;
 
-    private String secretKey;
+    //private String secretKey;
 
-    public ThirdPartyTransactionDTO(BigDecimal amount, String accountNumber, String secretKey) {
+    public ThirdPartyTransactionDTO(BigDecimal amount, String accountNumber) {
         this.amount = amount;
         this.accountNumber = accountNumber;
-        this.secretKey = secretKey;
+
     }
 
     public BigDecimal getAmount() {
@@ -32,11 +32,4 @@ public class ThirdPartyTransactionDTO {
         this.accountNumber = accountNumber;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
 }
