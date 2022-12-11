@@ -46,51 +46,51 @@ Import the "postman end points collection" file into the application. They are i
 
 Fill in the Admin and User credentials in the "Authorization" tab in Postman to be able to access the different end points.
 ### How to test
-1. Create Bank
+1. #### Create Bank
    > Use create account API to create an account by providing a `name` and `userName`
    >
    ![Create Account](screenshots/CreateBank.PNG)
 
 
-2. Create admin account
+2. #### Create admin account
    >The admin account will allow you to create accounts as well as users. Remember their password :)
    > 
    ![Create Account](screenshots/CreateNewAdmin.PNG)
 
-2. Create new account holder
+2. #### Create new account holder
    >Fill in the requested fields to create a new account holder. Remember that each account has a Primary Owner and an optional SecondaryOwner.
 
    ![createAccountHolder](screenshots/CreateNewAccountHolder.PNG)
 
-3. Choose an account type and fill in the details. Account numbers are created randomly when an account is initiated and are unique.
+3. #### Choose an account type and fill in the details. Account numbers are created randomly when an account is initiated and are unique.
    >If your account holder is under 24 years of age, the system will automatically open a "Student Checking" account for you under different conditions.
 
    ![newAccount](screenshots/CreateNewAccount.PNG)
 
-4. Delete Account
+4. #### Delete Account
    >Try the route to delete accounts
 
    ![Check Balance](screenshots/DeleteAccount.PNG)
 
-5. Make a transaction
+5. #### Make a transaction
    >Make sure to replace the account numbers with two that are created in the database together. Enter the credentials that allow the transaction.
 
    ![Check Balance](screenshots/Maketransfer.PNG)
 
-4. Withdraw
+4. #### Withdraw
    >Remember to select the id that corresponds to the correct user account in the request header.
 
    ![Withdraw cash](screenshots/withdraw.PNG)
 
-5. Check Balance again to verify withdrawal
+5. #### Check Balance again to verify withdrawal
    >Verify the transaction through the corresponding route
 
    ![Check Balance](screenshots/Showaccountbalance.PNG)
 
 
 
-   Check Balance again to verify withdrawal
-   >Verify the transaction through the corresponding route
+### UML Class Diagram
+   >A diagram showing the initial approach to the Rest API.
 
    ![uml](screenshots/banksystemrefactor.png)
 
