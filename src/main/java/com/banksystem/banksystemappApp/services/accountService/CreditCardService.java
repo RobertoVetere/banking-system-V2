@@ -5,6 +5,7 @@ import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.CreditCard;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
+import com.banksystem.banksystemappApp.models.users.User;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CreditCardRepository;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
@@ -71,35 +72,31 @@ public class CreditCardService {
 
     public BigDecimal showCreditCardBalance(UserDetails userDetails , Long id, String secretKey) {
 
-                CreditCard account = creditCardRepository.findById(id).orElseThrow
-                        (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        CreditCard account = creditCardRepository.findById(id).orElseThrow
+                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        if (account.getSecretKey().equals(secretKey)){
+            User holder = userRepository.findByUserName(userDetails.getUsername()).orElseThrow(()
+                        -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        userRepository.findByUserName(userDetails.getUsername()).get();
+                if (account.getSecretKey().equals(secretKey) & holder.getUserName().equals
+                        (accountRepository.findById(id).get().getPrimaryOwner().getUserName())){
 
-            if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName())){
+                        account.setCheckLastConnection(LocalDate.now());
+                        LocalDate last = account.getCreatedDate();
+                        Period period = Period.between ( last , account.getCheckLastConnection());
 
+                            int days = (period.getDays());
 
-                account.setCheckLastConnection(LocalDate.now());
-                LocalDate last = account.getCreatedDate();
-                Period period = Period.between ( last , account.getCheckLastConnection());
+                                if (days > 31){
 
-                int days = (period.getDays());
+                                    BigDecimal interest = account.getInterestRate().divide(new BigDecimal(100));
+                                    account.setBalance(account.getBalance().multiply(interest));
+                                    creditCardRepository.save(account);
 
-                    if (days > 31){
+                                }
 
-                        BigDecimal interest = account.getInterestRate().divide(new BigDecimal(100));
-                        account.setBalance(account.getBalance().multiply(interest));
-                        creditCardRepository.save(account);
-
-                    }
-
-                    return account.getBalance();
-                }
-
-             }
-                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, wrong credentials");
+                                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, wrong credentials");
+                            }
+                                return account.getBalance();
         }
-
 }
