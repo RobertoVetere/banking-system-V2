@@ -38,40 +38,34 @@ public class TransactionService {
 
         Account targetAccount = accountRepository.findByAccountNumber(transactionDTO.getTargetAccountNumber());
 
-/*
-        if (targetAccount.getPrimaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
-                & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())
-                ||
-                targetAccount.getSecondaryOwner().getName().equals(transactionDTO.getTargetOwnerName())
-                        & targetAccount.getAccountNumber().equals(transactionDTO.getTargetAccountNumber())) {
+        if (userDetails.getUsername().equals(transactionOwner.getPrimaryOwner().getUserName()) ||
 
+                userDetails.getUsername().equals(transactionOwner.getSecondaryOwner().getUserName())){
+                    if (transactionDTO.getTransactionOwnerAccountNumber().equals(transactionOwner.getAccountNumber())){
 
- */      if (transactionDTO.getTransactionOwnerAccountNumber().equals(transactionOwner.getAccountNumber())){
+                        if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) > 0) {
 
-             if (transactionOwner.getBalance().compareTo(transactionDTO.getAmount()) > 0) {
+                            transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
+                            targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
 
-                transactionOwner.setBalance(transactionOwner.getBalance().subtract(transactionDTO.getAmount()));
-                 targetAccount.setBalance(targetAccount.getBalance().add(transactionDTO.getAmount()));
+                                accountRepository.saveAll(List.of(transactionOwner, targetAccount));
 
-                 accountRepository.saveAll(List.of(transactionOwner, targetAccount));
+                                    Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
+                                            transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
 
-                 Transaction transaction = new Transaction(transactionDTO.getTransactionOwnerAccountNumber(), transactionDTO.getTargetAccountNumber(),
-                         transactionOwner, targetAccount, transactionDTO.getTargetOwnerName(), transactionDTO.getAmount(),TransactionType.TRANSFER);
+                    return transactionRepository.save(transaction);
 
-                return transactionRepository.save(transaction);
+                } else {
 
-            } else {
-
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sorry insufficient funds");
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "sorry insufficient funds");
+                }
             }
+
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry credentials wrong");
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "INCORRECT ACCOUNT");
-            }
-/*
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, the account number is invalid");
-    }
 
-         */
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "SORRY INCORRECT DATA");
+    }
 
     public Account deposit(UserDetails userDetails , Long id, BigDecimal deposit) {
 
