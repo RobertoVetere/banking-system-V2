@@ -47,43 +47,43 @@ public class CheckingService {
     }
 
 
-    public Account addChecking(UserDetails userDetails , AccountDTO accountDTO) {
-
-        userRepository.findByUserName(userDetails.getUsername()).get();
+    public Account addChecking(AccountDTO accountDTO) {
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
+
         AccountHolder secondaryOwner = null;
         if(accountDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(accountDTO.getSecondaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
-        if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
-            Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.STUDENTCHECKING);
+            if(Period.between(primaryOwner.getDateOfBirth(), LocalDate.now()).getYears() < 24){
 
-            String encodedPassword = passwordEncoder.encode(studentChecking.getSecretKey());
-            studentChecking.setSecretKey(encodedPassword);
-            studentChecking = accountRepository.save(studentChecking);
+                Account studentChecking = new StudentChecking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.STUDENTCHECKING);
 
-            return accountRepository.save(studentChecking);
+                    String encodedPassword = passwordEncoder.encode(studentChecking.getSecretKey());
+                    studentChecking.setSecretKey(encodedPassword);
+                    studentChecking = accountRepository.save(studentChecking);
 
-        }else{
-            Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.CHECKING);
+                        return accountRepository.save(studentChecking);
 
-            String encodedPassword = passwordEncoder.encode(Checking.getSecretKey());
-            Checking.setSecretKey(encodedPassword);
-            Checking = accountRepository.save(Checking);
+            }else{
 
-            return accountRepository.save(Checking);
-        }
+                    Account Checking = new Checking(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, secondaryOwner, AccountType.CHECKING);
+
+                    String encodedPassword = passwordEncoder.encode(Checking.getSecretKey());
+                    Checking.setSecretKey(encodedPassword);
+                    Checking = accountRepository.save(Checking);
+
+                        return accountRepository.save(Checking);
+
+            }
     }
 
-    public void deleteChecking(UserDetails userDetails , Long id){
-
-        userRepository.findByUserName(userDetails.getUsername()).get();
+    public void deleteChecking(Long id){
 
         Account account = accountRepository.findById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        accountRepository.deleteById(id);
+        accountRepository.deleteById(account.getId());
     }
 }

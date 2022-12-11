@@ -25,9 +25,7 @@ public class AccountService {
     @Autowired
     UserRepository userRepository;
 
-    public Account updateAccountBalance(UserDetails userDetails ,Long id, BigDecimal balance) {
-
-        userRepository.findByUserName(userDetails.getUsername()).get();
+    public Account updateAccountBalance(Long id, BigDecimal balance) {
 
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
@@ -39,8 +37,6 @@ public class AccountService {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
-
-
         if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName()) ||
             userDetails.getUsername().equals(accountRepository.findById(id).get().getSecondaryOwner().getUserName())){
 
@@ -49,6 +45,6 @@ public class AccountService {
                     return account.getBalance();
         }
 
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "SORRY INCORRECT DATA");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect credentials");
     }
 }

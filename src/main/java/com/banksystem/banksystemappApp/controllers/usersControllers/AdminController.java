@@ -59,8 +59,8 @@ public class AdminController {
 
     @PostMapping("/add-checking")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account addNewChecking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO checking) {
-        return checkingService.addChecking(userDetails, checking);
+    public Account addNewChecking(@RequestBody AccountDTO checking) {
+        return checkingService.addChecking(checking);
     }
 
     @PostMapping("/add-saving")
@@ -78,8 +78,8 @@ public class AdminController {
 
     @PatchMapping("/update-balance/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account updateAccountBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal balance){
-        return accountService.updateAccountBalance(userDetails , id, balance);
+    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
+        return accountService.updateAccountBalance( id, balance);
     }
 
 
@@ -92,8 +92,8 @@ public class AdminController {
 
     @DeleteMapping("/delete-checking/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteProduct(@AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        checkingService.deleteChecking(userDetails , id);
+    public void deleteProduct(@PathVariable("id") Long id) {
+        checkingService.deleteChecking(id);
     }
 
 

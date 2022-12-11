@@ -131,7 +131,7 @@ public class TransactionService {
 
             }else {
 
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sorry insufficient funds");
             }
 /*
         }else{
