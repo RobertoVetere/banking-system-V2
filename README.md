@@ -16,13 +16,20 @@ Technologies and Dependencies
 - Spring Boot DevTools
 - Spring Security
 - Project lombok
+- SQL
+
+The system has 4 types of accounts, StudentChecking, Checking, Savings, and CreditCard. The system must have 3 types of Users: Admins, AccountHolders and ThirdParty.
+Admins can create new accounts. When creating a new account they can create Checking, Savings or CreditCard Accounts.
+
+
+
 
 ## Running locally 
 ```
 localhost:8080/
 ```
 Remember to change the password in application.properties.
-Some sample screenshots are available to help you test the api in Postman.
+Some sample screenshots are available to help you test the api in Postman. 
 
 ![Create Account](screenshots/properties.PNG)
 
@@ -33,7 +40,7 @@ For convenience it includes some examples of accounts and users ready for testin
 Routes are secured, passwords are encrypted when creating Accounts and Users. Remember them to be able to authorise requests in Postman.
 
 ## Testing
-Import the "postman end points collection" file into the application.
+Import the "postman end points collection" file into the application. They are in the project folder.
 
 ### How to test
 1. Create Bank
