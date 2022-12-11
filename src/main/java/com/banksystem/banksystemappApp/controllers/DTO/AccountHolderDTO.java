@@ -21,7 +21,8 @@ public class AccountHolderDTO {
     private String userName;
 
     private String password;
-
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;
 
     @Embedded
@@ -44,6 +45,7 @@ public class AccountHolderDTO {
         this.mailingAddress = mailingAddress;
         this.primaryAddress = primaryAddress;
     }
+
 
     public String getUserName() {
         return userName;

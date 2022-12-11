@@ -7,7 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -19,9 +22,9 @@ import java.util.Objects;
 @Table(name = "primary_owner")
 public class AccountHolder extends User {
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
     @Embedded
@@ -55,6 +58,11 @@ public class AccountHolder extends User {
         this.mailingAddress = mailingAddress;
         this.primaryAddress = primaryAddress;
     }
+
+    public AccountHolder(String name, @NonNull String userName, String password) {
+        super(name, userName, password);
+    }
+
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;

@@ -54,25 +54,24 @@ public class BanksystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //passwordEncoder.encode("1234")
-
-		/*
-		AccountHolder BankOfNeverland = new AccountHolder("Bank Of Neverland","1234",LocalDate.of(1980, 3, 25),
+/*
+		AccountHolder BankOfNeverland = new AccountHolder("Bank Of Neverland","admin","1234",LocalDate.of(1980, 3, 25),
 				new Address("carrer Sant Beatle",87562,"Tenerife","Spain"),
 				new Address("calle Jardín Bogdanico",45638,"Madrid","Spain"));
 
-		AccountHolder primaryOwner = new AccountHolder("Marta Perez","1234",LocalDate.of(2000, 1, 8),
+		AccountHolder primaryOwner = new AccountHolder("Marta Perez","admin2","1234",LocalDate.of(2000, 1, 8),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-		AccountHolder secondaryOwner2 = new AccountHolder("Roberto Vetere","1234",LocalDate.of(1985, 9, 21),
+		AccountHolder secondaryOwner2 = new AccountHolder("Roberto Vetere","admin3","1234",LocalDate.of(1985, 9, 21),
 				new Address("carrer la nada",28850,"Madrid","Spain"),
 				new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
 
-		AccountHolder primaryOwner2 = new AccountHolder("Antonio Roman","1234",LocalDate.of(1987, 3, 18),
+		AccountHolder primaryOwner2 = new AccountHolder("Antonio Roman","admin4","1234",LocalDate.of(1987, 3, 18),
 				new Address("Calle de Enmedio",28850,"Torrejón","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-		AccountHolder primaryOwner3 = new AccountHolder("Javier Alonso","1234",LocalDate.of(2000, 3, 18),
+		AccountHolder primaryOwner3 = new AccountHolder("Javier Alonso","admin5","1234",LocalDate.of(2000, 3, 18),
 				new Address("Calle de Enmedio",28850,"Torrejón","Spain"),
 				new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 		//roleRepository.save(new Role("AccountHolder",BankOfNeverland));
@@ -110,11 +109,10 @@ public class BanksystemApplication implements CommandLineRunner {
 		Checking thirdPartyAccount = new Checking(new BigDecimal("0"),"12345679L",null,null,AccountType.CHECKING);
 
 
+ */
 
 
 
-
-		 */
 
 
 
