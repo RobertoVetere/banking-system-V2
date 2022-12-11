@@ -5,7 +5,7 @@
 # Spring boot REST API
 Final bootcamp project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank.
 
-Technologies and Dependencies
+Technologies and dependencies
 
 - Java 19
 - Spring Boot
@@ -29,9 +29,7 @@ Admins can create new accounts. When creating a new account they can create Chec
 localhost:8080/
 ```
 Remember to change the password in application.properties.
-Some sample screenshots are available to help you test the api in Postman. 
-
-![Create Account](screenshots/properties.PNG)
+Some sample screenshots are available to help you test the api in Postman.
 
 The database is included in the "dataBase" folder of the project under the name "banksystem".
 
@@ -47,6 +45,7 @@ Import the "postman end points collection" file into the application. They are i
    > Use create account API to create an account by providing a `name` and `userName`
    >
    ![Create Account](screenshots/CreateBank.PNG)
+
 
 2. Create admin account
    >The admin account will allow you to create accounts as well as users. Remember their password :)
