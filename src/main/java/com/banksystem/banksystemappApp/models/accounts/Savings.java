@@ -2,6 +2,9 @@ package com.banksystem.banksystemappApp.models.accounts;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.Entity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,16 +20,16 @@ public class Savings extends Account {
     public Savings() {
     }
 
-    public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
-    }
 
     public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    BigDecimal minimumBalance, Double interestRate, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
+    }
+    public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+                   AccountType accountType) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
     public LocalDate getCheckLastConnection() {
@@ -53,6 +56,8 @@ public class Savings extends Account {
 
     public void setMinimumBalance(BigDecimal minimumBalance) {
 
+      try{
+
         BigDecimal limit = new BigDecimal("100.00");
 
         if (minimumBalance.compareTo(limit) < 0) {
@@ -64,6 +69,10 @@ public class Savings extends Account {
             this.minimumBalance = minimumBalance;
 
         }
+      }catch (IllegalArgumentException exception) {
+
+          throw new IllegalArgumentException("Please, set minimum balance ver 100");
+      }
     }
 
     public Double getInterestRate() {
@@ -72,6 +81,8 @@ public class Savings extends Account {
 
     public void setInterestRate(Double interestRate) {
 
+        try{
+
         if (interestRate > 0.5) {
 
             this.interestRate = 0.5;
@@ -79,6 +90,12 @@ public class Savings extends Account {
         }else{
             this.interestRate = interestRate;
         }
+        }catch(IllegalArgumentException exception){
+
+            throw new IllegalArgumentException("Please, enter a correct interest rate");
+
+        }
+
     }
 
     @Override

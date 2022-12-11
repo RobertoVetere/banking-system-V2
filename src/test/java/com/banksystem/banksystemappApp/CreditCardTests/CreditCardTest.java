@@ -71,7 +71,7 @@ public class CreditCardTest {
 
     @Test
     void shouldSetDefaultCreditLimit100_OK(){
-        CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),"789L",null,null,
+        CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),"789L",null,null,new BigDecimal("100.00"),new BigDecimal("0.20"),
                  AccountType.CREDITCARD);
         creditCardRepository.save(creditCard2);
 
@@ -80,8 +80,8 @@ public class CreditCardTest {
 
     @Test
     void shouldSetDefaulInteresRate_OK(){
-        CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),"789L",null,null,
-                 AccountType.CREDITCARD);
+        CreditCard creditCard2 = new CreditCard(new BigDecimal("1800.00"),"789L",null,null,new BigDecimal("100.00"),new BigDecimal("0.20"),
+                AccountType.CREDITCARD);
         creditCardRepository.save(creditCard2);
 
         assertEquals(new BigDecimal("0.20"),creditCardRepository.findAll().get(1).getInterestRate());

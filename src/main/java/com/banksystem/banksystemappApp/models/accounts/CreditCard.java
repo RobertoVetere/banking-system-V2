@@ -29,11 +29,6 @@ public class CreditCard extends Account {
         setInterestRate(interestRate);
     }
 
-    public CreditCard(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
-                      AccountHolder secondaryOwner, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
-    }
-
     public LocalDate getCheckLastConnection() {
         return checkLastConnection;
     }
@@ -58,16 +53,24 @@ public class CreditCard extends Account {
 
     public void setCreditLimit(BigDecimal creditLimit) {
 
-        BigDecimal limit = new BigDecimal("100000.00");
+        try{
 
-        if (creditLimit.compareTo(limit) > 0) {
+            BigDecimal limit = new BigDecimal("100000.00");
 
-            this.creditLimit = limit;
+                if (creditLimit.compareTo(limit) > 0) {
 
-        }else{
+                    this.creditLimit = limit;
 
-            this.creditLimit = creditLimit;
+                }else{
+
+                    this.creditLimit = creditLimit;
+                }
+
+        }catch(IllegalArgumentException exception){
+
+            throw new IllegalArgumentException("Please, set credit limit under 100.000");
         }
+
 
     }
 
@@ -76,6 +79,8 @@ public class CreditCard extends Account {
     }
 
     public void setInterestRate(BigDecimal interestRate) {
+
+      try{
 
         BigDecimal interesRateLimit = new BigDecimal("0.10");
 
@@ -86,6 +91,12 @@ public class CreditCard extends Account {
         }else{
 
             this.interestRate = interestRate;
+        }
+
+      }catch(IllegalArgumentException exception){
+
+          throw new IllegalArgumentException("Please, set credit limit over 0.10");
+
         }
     }
 
