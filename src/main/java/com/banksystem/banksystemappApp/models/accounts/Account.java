@@ -41,9 +41,9 @@ public abstract class Account {
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;
 
-    @ManyToOne
-    @JoinColumn(name = "admin")
-    private Admin admin;
+    //@ManyToOne
+    //@JoinColumn(name = "admin")
+    //private Admin admin;
 
     @ManyToOne
     @JoinColumn(name = "bank")
@@ -81,6 +81,10 @@ public abstract class Account {
         setAccountType(accountType);
     }
 
+
+    public Bank getBank() {return bank;}
+
+    public void setBank(Bank bank) {this.bank = bank;}
 
     public AccountType getAccountType() {
         return accountType;

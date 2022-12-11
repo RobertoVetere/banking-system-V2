@@ -23,11 +23,11 @@ public class Bank {
 
     @OneToMany(mappedBy = "bank")
     @JsonIgnore
-    private List<User> userList = new ArrayList<>();
+    final List<User> userList = new ArrayList<>();
 
     @OneToMany(mappedBy = "bank")
     @JsonIgnore
-    private List<Account> accountList = new ArrayList<>();
+    final List<Account> accountList = new ArrayList<>();
 
     public Bank() {
     }
@@ -59,5 +59,13 @@ public class Bank {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
     }
 }
