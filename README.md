@@ -26,6 +26,8 @@ When creating a new account they can create Checking, Savings or CreditCard Acco
 
 
 
+
+
 ## Running locally 
 ```
 localhost:8080/
@@ -42,6 +44,7 @@ Routes are secured, passwords are encrypted when creating Accounts and Users. Re
 ## Testing
 Import the "postman end points collection" file into the application. They are in the project folder.
 
+Fill in the Admin and User credentials in the "Authorization" tab in Postman to be able to access the different end points.
 ### How to test
 1. Create Bank
    > Use create account API to create an account by providing a `name` and `userName`
