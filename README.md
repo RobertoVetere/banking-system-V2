@@ -1,5 +1,5 @@
 # Banking System 
-![cover](screenshots/bankofneverland.PNG)
+![cover](https://github.com/RobertoVetere/banking-system-V2/blob/main/screenshots/bankofneverland.png)
 
 
 # Spring boot REST API
