@@ -1,6 +1,6 @@
 # Banking System 
 
-![Create Account](screenshots/portada.PNG)
+![Create Account](screenshots/bankofneverland.PNG)
 
 # Spring boot REST API
 Example project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank
@@ -23,12 +23,12 @@ Import the "postman end points collection" file into the application.
 1. Create Bank
    > Use create account API to create an account by providing a `bankName` and `ownerName`
    >
-   ![Create Account](screenshots/Create Bank.PNG)
+   ![Create Account](screenshots/CreateBank.PNG)
 
 > Make sure to write down the `sortCode` and the `accountNumber` to proceed with other APIs
 
 2. Create admin account
-   ![Create Account](screenshots/Create New Admin.PNG)
+   ![Create Account](screenshots/CreateNewAdmin.PNG)
 
 2. Create new account holder
    >Use noted `accountNumber` as `targetAccountNo` and provide amount greater than zero to deposit cash into an account
