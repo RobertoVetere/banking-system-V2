@@ -92,7 +92,7 @@ Fill in the Admin and User credentials in the "Authorization" tab in Postman to 
    Check Balance again to verify withdrawal
    >Verify the transaction through the corresponding route
 
-   ![Check Balance](screenshots/BankSystemUML.PNG)
+   ![uml](screenshots/BankSystemUML.PNG)
 
 ### Author
 <li><a href="https://github.com/RobertoVetere">Roberto Vetere</a></li>
