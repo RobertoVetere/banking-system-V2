@@ -33,21 +33,23 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests()
 
                 .requestMatchers(HttpMethod.GET, "/account-holder/balance/{id}").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/transfer").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/savings-balance/{id}").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/deposit/{id}").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/account-holder/withdrawal/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/account-holder/transfer").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/account-holder/savings-balance/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PATCH, "/account-holder/deposit/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PATCH, "/account-holder/withdrawal/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/credit-card/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/account-holder/all").hasRole("USER")
 
 
 
                 .requestMatchers(HttpMethod.GET, "/admin/checking-all").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/create-account-holder").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/admin/add-checking").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/admin/add-saving").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/admin/add-credit-card").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/admin/update-balance/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/create-account-holder").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-checking").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-saving").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-credit-card").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH, "/admin/update-balance/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/add-third-party").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/admin/add-third-party").hasRole("ADMIN")
 
 
 
