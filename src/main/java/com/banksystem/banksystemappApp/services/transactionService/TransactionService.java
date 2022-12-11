@@ -5,6 +5,7 @@ import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.enums.TransactionType;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
+import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.transactionRepository.TransactionRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.AccountRepository;
@@ -71,37 +72,52 @@ public class TransactionService {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
+
+
         Account account = accountRepository.findById(id).orElseThrow
                 (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
+            if (userDetails.getUsername().equals(account.getPrimaryOwner().getUserName())){
 
-        account.setBalance(account.getBalance().add(deposit));
+                    account.setBalance(account.getBalance().add(deposit));
 
-            Transaction transaction = new Transaction(account.getAccountNumber(),account,deposit, TransactionType.DEPOSIT);
-            transactionRepository.save(transaction);
+                        Transaction transaction = new Transaction(account.getAccountNumber(),account,deposit, TransactionType.DEPOSIT);
+                        transactionRepository.save(transaction);
 
-        return accountRepository.save(account);
+                    return accountRepository.save(account);
+
+                    }
+
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "SORRY INCORRECT DATA");
     }
 
     public Account withdrawal(UserDetails userDetails , Long id, BigDecimal withdrawal) {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
-        Account account = accountRepository.findById(id).orElseThrow
-                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+            Account account = accountRepository.findById(id).orElseThrow
+                        (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
 
-        if (account.getBalance().compareTo(withdrawal) < 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
-        }else{
+                if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName()) ){
 
-            account.setBalance(account.getBalance().subtract(withdrawal));
+                    if (account.getBalance().compareTo(withdrawal) < 0) {
 
-                Transaction transaction = new Transaction(account.getAccountNumber(),account,withdrawal, TransactionType.WITHDRAW);
-                transactionRepository.save(transaction);
+                        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry insufficient funds");
+
+                        }else{
+
+                            account.setBalance(account.getBalance().subtract(withdrawal));
+
+                                Transaction transaction = new Transaction(account.getAccountNumber(),account,withdrawal, TransactionType.WITHDRAW);
+                                transactionRepository.save(transaction);
+
+            }
+                return accountRepository.save(account);
 
         }
 
-        return accountRepository.save(account);
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "SORRY INCORRECT DATA");
+
     }
 
     public Account thirdPartyPayment(ThirdPartyDTO thirdPartyDTO) {

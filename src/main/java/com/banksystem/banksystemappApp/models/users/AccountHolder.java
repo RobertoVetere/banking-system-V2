@@ -43,6 +43,7 @@ public class AccountHolder extends User {
     @JsonIgnore
     private List<Account> accountList = new ArrayList<>();
 
+   
     @OneToMany(mappedBy = "secondaryOwner")
     @JsonIgnore
     private List<Account> accountListSecondary = new ArrayList<>();
