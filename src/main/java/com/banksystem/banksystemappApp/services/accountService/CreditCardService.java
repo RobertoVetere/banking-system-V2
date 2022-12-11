@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -48,13 +49,15 @@ public class CreditCardService {
         return creditCardRepository.save(creditCard);
     }
 
-    public Account addCreditCard(UserDetails userDetails, AccountDTO accountDTO) {
-
-        userRepository.findByUserName(userDetails.getUsername()).get();
+    public Account addCreditCard(AccountDTO accountDTO) {
 
         AccountHolder primaryOwner = accountHolderRepository.findById(accountDTO.getPrimaryOwnerId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Primary owner not found"));
+
         AccountHolder secondaryOwner = null;
+
+        if(accountDTO.getSecondaryOwnerId() != null) secondaryOwner = accountHolderRepository.findById(accountDTO.getSecondaryOwnerId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Secondary owner not found"));
 
         Account creditCard = new CreditCard(accountDTO.getBalance(), accountDTO.getSecretKey(), primaryOwner, null,
                 accountDTO.getCreditLimit(),accountDTO.getInterestRate(), AccountType.CREDITCARD);
@@ -66,34 +69,37 @@ public class CreditCardService {
         return accountRepository.save(creditCard);
     }
 
-    public BigDecimal showCreditCardBalance(UserDetails userDetails , Long id, Long secretKey) {
+    public BigDecimal showCreditCardBalance(UserDetails userDetails , Long id, String secretKey) {
+
+                CreditCard account = creditCardRepository.findById(id).orElseThrow
+                        (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        if (account.getSecretKey().equals(secretKey)){
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
-        CreditCard account = creditCardRepository.findById(id).orElseThrow
-                (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+            if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName())){
 
 
-        LocalDate last = account.getCreatedDate();
-        LocalDate now= LocalDate.now();
-        Period period = Period.between ( last , now);
+                account.setCheckLastConnection(LocalDate.now());
+                LocalDate last = account.getCreatedDate();
+                Period period = Period.between ( last , account.getCheckLastConnection());
 
+                int days = (period.getDays());
 
+                    if (days > 31){
 
+                        BigDecimal interest = account.getInterestRate().divide(new BigDecimal(100));
+                        account.setBalance(account.getBalance().multiply(interest));
+                        creditCardRepository.save(account);
 
-        int days = (period.getDays());
+                    }
 
+                    return account.getBalance();
+                }
 
-
-        if (secretKey.equals(account.getSecretKey())){
-            if (days > 31){
-
-                BigDecimal interest = account.getInterestRate().divide(new BigDecimal(100));
-                account.setBalance(account.getBalance().multiply(interest));
-                creditCardRepository.save(account);
-            }
-            return account.getBalance();
+             }
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, wrong credentials");
         }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry, the password is incorrect");
-    }
+
 }

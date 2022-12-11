@@ -37,8 +37,7 @@ public class AccountService {
 
         userRepository.findByUserName(userDetails.getUsername()).get();
 
-        if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName()) ||
-            userDetails.getUsername().equals(accountRepository.findById(id).get().getSecondaryOwner().getUserName())){
+        if (userDetails.getUsername().equals(accountRepository.findById(id).get().getPrimaryOwner().getUserName())){
 
                 Account account = accountRepository.findById(id).orElseThrow
                         (() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));

@@ -77,7 +77,7 @@ public class AccountHolderController {
 
     @GetMapping("/credit-card/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getCreditCardBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam Long secretKey){
+    public BigDecimal getCreditCardBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey){
         return creditCardService.showCreditCardBalance(userDetails ,id , secretKey);
     }
 

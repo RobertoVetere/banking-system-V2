@@ -5,6 +5,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,8 @@ public class CreditCard extends Account {
         private BigDecimal creditLimit = new BigDecimal("100");
         @Nullable
         private BigDecimal interestRate = new BigDecimal("0.20");
+
+        private LocalDate checkLastConnection;
 
 
     public CreditCard() {
@@ -29,6 +32,14 @@ public class CreditCard extends Account {
     public CreditCard(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                       AccountHolder secondaryOwner, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
+    }
+
+    public LocalDate getCheckLastConnection() {
+        return checkLastConnection;
+    }
+
+    public void setCheckLastConnection(LocalDate checkLastConnection) {
+        this.checkLastConnection = checkLastConnection;
     }
 
     @Override

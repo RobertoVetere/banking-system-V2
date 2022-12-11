@@ -71,8 +71,8 @@ public class AdminController {
 
     @PostMapping("/add-credit-card")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account addNewCreditCard(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO creditCard) {
-        return creditCardService.addCreditCard(userDetails , creditCard);
+    public Account addNewCreditCard(@RequestBody AccountDTO creditCard) {
+        return creditCardService.addCreditCard(creditCard);
     }
 
 
