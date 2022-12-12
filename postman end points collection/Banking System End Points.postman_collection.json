@@ -74,7 +74,7 @@
 			"name": "Admin",
 			"item": [
 				{
-					"name": "Create New Accoun Holder",
+					"name": "Create New Account Holder",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -138,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Datafono-1234\",\r\n    \"hashedKey\":\"123456789\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Datafono\",\r\n    \"userName\": \"third\",\r\n    \"password\": \"1234\",\r\n    \"hashedKey\":\"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,7 +224,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"primaryOwnerId\": \"6\",\r\n    \"secondaryOwnerId\":\"5\",\r\n    \"balance\":\"25478.00\",\r\n    \"secretKey\": \"1234\",\r\n    \"interestRate\": \"\"\r\n}",
+							"raw": "{\r\n    \"primaryOwnerId\": \"15\",\r\n    \"secondaryOwnerId\":\"15\",\r\n    \"balance\":\"25478.00\",\r\n    \"secretKey\": \"1234\",\r\n    \"minimumBalance\":\"\",\r\n    \"interestRate\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -267,7 +267,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"primaryOwnerId\": \"3\",\r\n    \"secondaryOwnerId\": \"\",\r\n    \"balance\": \"2000.00\",\r\n    \"secretKey\": \"1234\",\r\n    \"creditLimit\": \"100\",\r\n    \"interestRate\": \"0.2\"\r\n}",
+							"raw": "{\r\n    \"primaryOwnerId\": \"2\",\r\n    \"secondaryOwnerId\": \"\",\r\n    \"balance\": \"2000.00\",\r\n    \"secretKey\": \"1234\",\r\n    \"creditLimit\": \"100\",\r\n    \"interestRate\": \"0.20\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -431,11 +431,26 @@
 				{
 					"name": "Make Transfer",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Otero",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"transactionOwnerAccountNumber\": \"ES91 0156 8456 0574 0239\",\r\n    \"targetAccountNumber\": \"ES91 4250 0686 3426 9855\",\r\n    \"targetOwnerName\": \"Antonio Roman\",\r\n    \"amount\": \"18000.00\"\r\n}",
+							"raw": "{\r\n    \"transactionOwnerAccountNumber\": \"ES91 3484 2238 2187 2991\",\r\n    \"targetAccountNumber\": \"ES91 8217 9741 4406 1608\",\r\n    \"targetOwnerName\": \"Julia Otero\",\r\n    \"amount\": \"18000.00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -457,14 +472,14 @@
 					"response": []
 				},
 				{
-					"name": "Get own account balance",
+					"name": "Get account balance",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "username",
-									"value": "Amore",
+									"value": "Otero",
 									"type": "string"
 								},
 								{
@@ -504,8 +519,116 @@
 					"response": []
 				},
 				{
+					"name": "Get saving balance",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Otero",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/account-holder/savings-balance/1?secretKey=1234",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"account-holder",
+								"savings-balance",
+								"1"
+							],
+							"query": [
+								{
+									"key": "secretKey",
+									"value": "1234"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Credit Card balance",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Otero",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/account-holder/balance/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"account-holder",
+								"balance",
+								"4"
+							],
+							"query": [
+								{
+									"key": "secretKey",
+									"value": "1234",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Deposit",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Otero",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -541,10 +664,25 @@
 				{
 					"name": "Withdrawal",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Otero",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/account-holder/withdrawal/3?withdrawal=1000",
+							"raw": "localhost:8080/account-holder/withdrawal/1?withdrawal=1000",
 							"host": [
 								"localhost"
 							],
@@ -552,7 +690,7 @@
 							"path": [
 								"account-holder",
 								"withdrawal",
-								"3"
+								"1"
 							],
 							"query": [
 								{
@@ -576,7 +714,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"amount\":\"1500\",\r\n    \"accountNumber\":\"ES91 2669 0661 1128 9509\",\r\n    \"secretKey\":\"1234L\"\r\n}",
+							"raw": "{\r\n    \"amount\":\"1500\",\r\n    \"accountNumber\":\"ES91 3484 2238 2187 2991\",\r\n    \"secretKey\":\"1234L\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -584,7 +722,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/third-party/payment/",
+							"raw": "localhost:8080/third-party/payment/?secretKey=1234",
 							"host": [
 								"localhost"
 							],
@@ -593,6 +731,12 @@
 								"third-party",
 								"payment",
 								""
+							],
+							"query": [
+								{
+									"key": "secretKey",
+									"value": "1234"
+								}
 							]
 						}
 					},
