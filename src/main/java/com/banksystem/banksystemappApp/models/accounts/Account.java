@@ -42,8 +42,8 @@ public abstract class Account {
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;
 
-    @ManyToOne
-    @JoinColumn(name = "bank")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_id")
     private Bank bank;
 
     @JsonFormat(pattern = "dd-MM-yyyy")

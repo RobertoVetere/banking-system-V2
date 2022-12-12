@@ -28,8 +28,8 @@ public class User {
     @Column(unique = true)
     private String userName;
 
-    @ManyToOne
-    @JoinColumn(name = "bank")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_id")
     private Bank bank;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

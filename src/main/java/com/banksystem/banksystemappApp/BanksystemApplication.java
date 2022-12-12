@@ -103,20 +103,14 @@ public class BanksystemApplication implements CommandLineRunner {
 				,AccountType.CHECKING);
 		checkingRepository.save(bankAccount);
 
-		ThirdParty thirdParty = new ThirdParty("Third-Party-0001","12345679");
-		thirdPartyRepository.save(thirdParty);
+		//ThirdParty thirdParty = new ThirdParty("Third-Party-0001","12345679");
+		//thirdPartyRepository.save(thirdParty);
 
 		Checking thirdPartyAccount = new Checking(new BigDecimal("0"),"12345679L",null,null,AccountType.CHECKING);
 
 
+
  */
-
-
-
-
-
-
-
 
 	}
 
