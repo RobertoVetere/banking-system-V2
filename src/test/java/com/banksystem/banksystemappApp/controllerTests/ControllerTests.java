@@ -72,6 +72,19 @@ public class ControllerTests {
     @Autowired
     TransactionRepository transactionRepository;
 
+    AccountHolder primaryOwner;
+
+    AccountHolder secondaryOwner2;
+
+    Checking account;
+
+    Checking account2;
+
+    Transaction transaction;
+
+    ThirdParty thirdParty;
+
+    Admin admin;
 
     @BeforeEach
     void setUp() {
@@ -84,27 +97,31 @@ public class ControllerTests {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         objectMapper.findAndRegisterModules();
 
-        Admin admin = new Admin("Marcos","admin","1234");
-        adminRepository.save(admin);
-        AccountHolder primaryOwner = new AccountHolder("Marta Perez","Perez","1234",LocalDate.of(2000, 1, 8),
+         primaryOwner = new AccountHolder("Marta Perez","Perez","1234",LocalDate.of(2000, 1, 8),
                 new Address("carrer Sant Andrew",8030,"Madrid","Spain"),
                 new Address("carrer Sant Andrew",8030,"Madrid","Spain"));
 
-        AccountHolder secondaryOwner2 = new AccountHolder("Roberto Vetere","admin3","1234",LocalDate.of(1985, 9, 21),
+        secondaryOwner2 = new AccountHolder("Roberto Vetere","admin3","1234",LocalDate.of(1985, 9, 21),
                 new Address("carrer la nada",28850,"Madrid","Spain"),
                 new Address("carrer Arquimedes",28504,"Barcelona","Spain"));
 
         accountHolderRepository.saveAll(List.of(primaryOwner, secondaryOwner2));
 
-        Checking account = new Checking(new BigDecimal("2452300.00"),"1234L",primaryOwner,null
+        account = new Checking(new BigDecimal("2452300.00"),"1234L",primaryOwner,null
                 ,new BigDecimal("100.0"),new BigDecimal("3.0"), AccountType.CHECKING);
 
-        Checking account2 = new Checking(new BigDecimal("2452300.00"),"1234L",secondaryOwner2,null
+        account2 = new Checking(new BigDecimal("2452300.00"),"1234L",secondaryOwner2,null
                 ,new BigDecimal("100.0"),new BigDecimal("3.0"), AccountType.CHECKING);
         checkingRepository.saveAll(List.of(account,account2));
 
-        Transaction transaction = new Transaction(account.getAccountNumber(),account2.getAccountNumber(),account,account2,account2.getPrimaryOwner().getName(),new BigDecimal("2452300.00"),TRANSFER);
+        transaction = new Transaction(account.getAccountNumber(),account2.getAccountNumber(),account,account2,account2.getPrimaryOwner().getName(),new BigDecimal("2452300.00"),TRANSFER);
         transactionRepository.save(transaction);
+
+        admin = new Admin( "alfredo", "alfredo", "alfredo");
+        adminRepository.save(admin);
+
+        thirdParty = new ThirdParty("Datafono12","thirdParty12","123456789","1234");
+        thirdPartyRepository.save(thirdParty);
 
     }
 
@@ -117,12 +134,9 @@ public class ControllerTests {
 
     //Este test da error 404
     @Test
-    @WithMockUser(username = "Alfredo", password = "1234")
+    @WithMockUser(username = "alfredo", password = "alfredo")
     void createThirdParty() throws Exception {
-        Admin admin456 = new Admin("Alfredo","Alfredo","1234");
-        adminRepository.save(admin456);
-        ThirdParty thirdParty = new ThirdParty("Datafono12","thirdParty12","123456789","1234");
-        thirdPartyRepository.save(thirdParty);
+
         String body = objectMapper.writeValueAsString(thirdParty);
         MvcResult result = mockMvc.perform(post("/admin/add-third-party/").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())

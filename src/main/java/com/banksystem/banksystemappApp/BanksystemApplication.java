@@ -1,16 +1,11 @@
 package com.banksystem.banksystemappApp;
 
-import com.banksystem.banksystemappApp.enums.AccountType;
-import com.banksystem.banksystemappApp.models.accounts.*;
-import com.banksystem.banksystemappApp.models.users.AccountHolder;
-import com.banksystem.banksystemappApp.models.users.Address;
-import com.banksystem.banksystemappApp.models.users.Role;
-import com.banksystem.banksystemappApp.models.users.ThirdParty;
+
+import com.banksystem.banksystemappApp.repositories.accountRepositories.CheckingRepository;
 import com.banksystem.banksystemappApp.repositories.accountRepositories.CreditCardRepository;
+import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
 import com.banksystem.banksystemappApp.repositories.securityRepository.RoleRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
-import com.banksystem.banksystemappApp.repositories.accountRepositories.CheckingRepository;
-import com.banksystem.banksystemappApp.repositories.accountRepositories.SavingsRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.ThirdPartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
