@@ -1,16 +1,12 @@
 package com.banksystem.banksystemappApp.services;
-
 import com.banksystem.banksystemappApp.models.users.User;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
-
 import com.banksystem.banksystemappApp.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

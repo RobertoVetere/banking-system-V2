@@ -21,11 +21,11 @@ public class Bank {
 
     private String password;
 
-    @OneToMany(mappedBy = "bank" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     final List<User> userList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "bank" ,  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     final List<Account> accountList = new ArrayList<>();
 

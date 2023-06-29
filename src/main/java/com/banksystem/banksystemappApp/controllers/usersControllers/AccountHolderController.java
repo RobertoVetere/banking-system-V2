@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.controllers.usersControllers;
+
 import com.banksystem.banksystemappApp.controllers.DTO.TransactionDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
@@ -28,59 +29,57 @@ public class AccountHolderController {
     AccountService accountService;
 
     @Autowired
-    TransactionService  transactionService;
+    TransactionService transactionService;
 
     @Autowired
-    SavingsService  savingsService;
+    SavingsService savingsService;
 
     @Autowired
-    CreditCardService  creditCardService;
+    CreditCardService creditCardService;
 
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<AccountHolder> findAllAccountHolders(){
+    public List<AccountHolder> findAllAccountHolders() {
         return accountHolderService.findAllAccountHolders();
     }
 
 
-
     @GetMapping("/balance/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getAccounBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id){
-        return accountService.showAccountBalance(userDetails , id);
+    public BigDecimal getAccounBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+        return accountService.showAccountBalance(userDetails, id);
     }
 
     @PostMapping("/transfer")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Transaction makeTransfer(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TransactionDTO transactionDTO) {
-        return transactionService.makeTransfer(userDetails , transactionDTO);
+        return transactionService.makeTransfer(userDetails, transactionDTO);
     }
 
     @GetMapping("/savings-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getSavingBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey){
-        return savingsService.showSavingBalance(userDetails, id , secretKey);
+    public BigDecimal getSavingBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey) {
+        return savingsService.showSavingBalance(userDetails, id, secretKey);
     }
 
     @PatchMapping("/deposit/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account deposit(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal deposit){
-        return transactionService.deposit(userDetails , id, deposit);
+    public Account deposit(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal deposit) {
+        return transactionService.deposit(userDetails, id, deposit);
     }
 
     @PatchMapping("/withdrawal/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account withdrawal(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal withdrawal){
-        return transactionService.withdrawal(userDetails , id, withdrawal);
+    public Account withdrawal(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam BigDecimal withdrawal) {
+        return transactionService.withdrawal(userDetails, id, withdrawal);
     }
 
     @GetMapping("/credit-card/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public BigDecimal getCreditCardBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey){
-        return creditCardService.showCreditCardBalance(userDetails ,id , secretKey);
+    public BigDecimal getCreditCardBalance(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestParam String secretKey) {
+        return creditCardService.showCreditCardBalance(userDetails, id, secretKey);
     }
-
 
 
 }

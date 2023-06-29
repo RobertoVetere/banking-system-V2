@@ -44,7 +44,7 @@ public class Transaction {
     }
 
     public Transaction(String transactionOwnerAccountNumber, String targetAccountNumber, Account transactionOwner,
-                       Account targetAccount, String targetOwnerName, BigDecimal amount,TransactionType transactionType) {
+                       Account targetAccount, String targetOwnerName, BigDecimal amount, TransactionType transactionType) {
         this.transactionOwnerAccountNumber = transactionOwnerAccountNumber;
         this.targetAccountNumber = targetAccountNumber;
         this.transactionOwner = transactionOwner;

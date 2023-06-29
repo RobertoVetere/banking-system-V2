@@ -4,18 +4,15 @@ import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.bank.Bank;
 import com.banksystem.banksystemappApp.models.transaction.Transaction;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
-import com.banksystem.banksystemappApp.models.users.Admin;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import static com.banksystem.banksystemappApp.models.RandomClass.randomAccountNumber;
 
 @Entity
@@ -67,7 +64,7 @@ public abstract class Account {
     }
 
     public Account(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
-                   AccountHolder secondaryOwner,  AccountType accountType) {
+                   AccountHolder secondaryOwner, AccountType accountType) {
         setBalance(balance);
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
@@ -76,9 +73,13 @@ public abstract class Account {
     }
 
 
-    public Bank getBank() {return bank;}
+    public Bank getBank() {
+        return bank;
+    }
 
-    public void setBank(Bank bank) {this.bank = bank;}
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     public AccountType getAccountType() {
         return accountType;
@@ -122,22 +123,22 @@ public abstract class Account {
 
     public void setBalance(BigDecimal balance) {
 
-        try{
+        try {
             BigDecimal zero = new BigDecimal("0.00");
 
             if (balance.compareTo(zero) > 0) {
 
                 this.balance = balance;
-            }else{
+            } else {
 
-            throw new  IllegalArgumentException("balance doesn't must be zero");
+                throw new IllegalArgumentException("balance doesn't must be zero");
 
             }
 
 
-        }catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
 
-            throw new  IllegalArgumentException("balance doesn't must be zero");
+            throw new IllegalArgumentException("balance doesn't must be zero");
         }
     }
 

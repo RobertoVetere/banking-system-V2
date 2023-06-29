@@ -1,7 +1,5 @@
 package com.banksystem.banksystemappApp.controllers.DTO;
 
-import jakarta.annotation.Nullable;
-
 import java.math.BigDecimal;
 
 public class TransactionDTO {

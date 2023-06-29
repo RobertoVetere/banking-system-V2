@@ -9,11 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Admin extends User{
-
-    //@OneToMany(mappedBy = "admin")
-    //@JsonIgnore
-    //private List<Account> accountList = new ArrayList<>();
+public class Admin extends User {
 
     public Admin() {
     }

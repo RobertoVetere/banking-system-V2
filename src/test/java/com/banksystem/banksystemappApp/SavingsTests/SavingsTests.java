@@ -17,7 +17,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class SavingsTests {
+public class
+SavingsTests {
 
     @Autowired
     SavingsRepository savingsRepository;

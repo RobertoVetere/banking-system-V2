@@ -4,7 +4,6 @@ import com.banksystem.banksystemappApp.controllers.DTO.AccountDTO;
 import com.banksystem.banksystemappApp.controllers.DTO.AccountHolderDTO;
 import com.banksystem.banksystemappApp.models.accounts.Account;
 import com.banksystem.banksystemappApp.models.accounts.Checking;
-
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.services.accountService.AccountService;
@@ -27,34 +26,35 @@ import java.util.List;
 public class AdminController {
 
 
-
     @Autowired
-    SavingsService  savingsService;
+    SavingsService savingsService;
 
     @Autowired
     CheckingService checkingService;
 
     @Autowired
-    CreditCardService  creditCardService;
+    CreditCardService creditCardService;
 
     @Autowired
-    AccountService  accountService;
+    AccountService accountService;
 
     @Autowired
-    ThirdPartyService  thirdPartyService;
+    ThirdPartyService thirdPartyService;
 
     @Autowired
     AccountHolderService accountHolderService;
 
     @GetMapping("/checking-all")
     @ResponseStatus(HttpStatus.OK)
-    public List<Checking> findAllCheckings(){return checkingService.findAllCheckings();
+    public List<Checking> findAllCheckings() {
+        return checkingService.findAllCheckings();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/create-account-holder")
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountHolder addNewThirdParty(@AuthenticationPrincipal UserDetails userDetails,@RequestBody AccountHolderDTO accountHolderDTO) {
-        return accountHolderService.addAccountHolder(userDetails , accountHolderDTO);
+    public AccountHolder addNewThirdParty(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountHolderDTO accountHolderDTO) {
+        return accountHolderService.addAccountHolder(userDetails, accountHolderDTO);
     }
 
     @PostMapping("/add-checking")
@@ -66,7 +66,7 @@ public class AdminController {
     @PostMapping("/add-saving")
     @ResponseStatus(HttpStatus.CREATED)
     public Account addNewSaving(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AccountDTO saving) {
-        return savingsService.addSaving( userDetails , saving);
+        return savingsService.addSaving(userDetails, saving);
     }
 
     @PostMapping("/add-credit-card")
@@ -78,16 +78,15 @@ public class AdminController {
 
     @PatchMapping("/update-balance/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance){
-        return accountService.updateAccountBalance( id, balance);
+    public Account updateAccountBalance(@PathVariable Long id, @RequestParam BigDecimal balance) {
+        return accountService.updateAccountBalance(id, balance);
     }
-
 
 
     @PostMapping("/add-third-party")
     @ResponseStatus(HttpStatus.CREATED)
     public ThirdParty addNewThirdParty(@AuthenticationPrincipal UserDetails userDetails, @RequestBody ThirdParty thirdParty) {
-        return thirdPartyService.addThirdParty(userDetails , thirdParty);
+        return thirdPartyService.addThirdParty(userDetails, thirdParty);
     }
 
     @DeleteMapping("/delete-checking/{id}")

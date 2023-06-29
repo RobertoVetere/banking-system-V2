@@ -1,8 +1,4 @@
 package com.banksystem.banksystemappApp.services.userService;
-
-import com.banksystem.banksystemappApp.enums.AccountType;
-import com.banksystem.banksystemappApp.models.accounts.Checking;
-import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.Role;
 import com.banksystem.banksystemappApp.models.users.ThirdParty;
 import com.banksystem.banksystemappApp.repositories.securityRepository.RoleRepository;
@@ -14,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

@@ -8,8 +8,6 @@ public class ThirdPartyTransactionDTO {
 
     private String accountNumber;
 
-    //private String secretKey;
-
     public ThirdPartyTransactionDTO(BigDecimal amount, String accountNumber) {
         this.amount = amount;
         this.accountNumber = accountNumber;

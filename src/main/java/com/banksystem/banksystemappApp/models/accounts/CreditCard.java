@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.models.accounts;
+
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.annotation.Nullable;
@@ -10,12 +11,12 @@ import java.util.Objects;
 
 @Entity
 public class CreditCard extends Account {
-        @Nullable
-        private BigDecimal creditLimit = new BigDecimal("100");
-        @Nullable
-        private BigDecimal interestRate = new BigDecimal("0.20");
+    @Nullable
+    private BigDecimal creditLimit = new BigDecimal("100");
+    @Nullable
+    private BigDecimal interestRate = new BigDecimal("0.20");
 
-        private LocalDate checkLastConnection;
+    private LocalDate checkLastConnection;
 
 
     public CreditCard() {
@@ -24,7 +25,7 @@ public class CreditCard extends Account {
     public CreditCard(BigDecimal balance, String secretKey, AccountHolder primaryOwner,
                       AccountHolder secondaryOwner, BigDecimal creditLimit,
                       BigDecimal interestRate, AccountType accountType) {
-        super(balance, secretKey, primaryOwner, secondaryOwner,  accountType);
+        super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         setCreditLimit(creditLimit);
         setInterestRate(interestRate);
     }
@@ -53,20 +54,20 @@ public class CreditCard extends Account {
 
     public void setCreditLimit(BigDecimal creditLimit) {
 
-        try{
+        try {
 
             BigDecimal limit = new BigDecimal("100000.00");
 
-                if (creditLimit.compareTo(limit) > 0) {
+            if (creditLimit.compareTo(limit) > 0) {
 
-                    this.creditLimit = limit;
+                this.creditLimit = limit;
 
-                }else{
+            } else {
 
-                    this.creditLimit = creditLimit;
-                }
+                this.creditLimit = creditLimit;
+            }
 
-        }catch(IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
 
             throw new IllegalArgumentException("Please, set credit limit under 100.000");
         }
@@ -80,22 +81,22 @@ public class CreditCard extends Account {
 
     public void setInterestRate(BigDecimal interestRate) {
 
-      try{
+        try {
 
-        BigDecimal interesRateLimit = new BigDecimal("0.10");
+            BigDecimal interesRateLimit = new BigDecimal("0.10");
 
-        if (interestRate.compareTo(interesRateLimit) < 0) {
+            if (interestRate.compareTo(interesRateLimit) < 0) {
 
-            this.interestRate = interesRateLimit;
+                this.interestRate = interesRateLimit;
 
-        }else{
+            } else {
 
-            this.interestRate = interestRate;
-        }
+                this.interestRate = interestRate;
+            }
 
-      }catch(IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
 
-          throw new IllegalArgumentException("Please, set credit limit over 0.10");
+            throw new IllegalArgumentException("Please, set credit limit over 0.10");
 
         }
     }

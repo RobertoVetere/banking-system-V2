@@ -1,13 +1,7 @@
 package com.banksystem.banksystemappApp.services.userService;
-
-import com.banksystem.banksystemappApp.controllers.DTO.AccountDTO;
 import com.banksystem.banksystemappApp.controllers.DTO.AccountHolderDTO;
-import com.banksystem.banksystemappApp.enums.AccountType;
-import com.banksystem.banksystemappApp.models.accounts.Account;
-import com.banksystem.banksystemappApp.models.accounts.Savings;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import com.banksystem.banksystemappApp.models.users.Role;
-import com.banksystem.banksystemappApp.models.users.User;
 import com.banksystem.banksystemappApp.repositories.securityRepository.RoleRepository;
 import com.banksystem.banksystemappApp.repositories.securityRepository.UserRepository;
 import com.banksystem.banksystemappApp.repositories.userRepositories.AccountHolderRepository;
@@ -17,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +31,6 @@ public class AccountHolderService {
     public List<AccountHolder> findAllAccountHolders() {
         return accountHolderRepository.findAll();
     }
-
-
 
     public AccountHolder addAccountHolder(UserDetails userDetails , AccountHolderDTO accountHolderDTO) {
 

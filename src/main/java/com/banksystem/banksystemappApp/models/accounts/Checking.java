@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.models.accounts;
+
 import com.banksystem.banksystemappApp.enums.AccountStatus;
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
@@ -11,7 +12,7 @@ import java.util.Objects;
 import static com.banksystem.banksystemappApp.enums.AccountType.CHECKING;
 
 @Entity
-public class Checking extends Account{
+public class Checking extends Account {
 
     @Nullable
     private BigDecimal minimumBalance = new BigDecimal("250.00");
@@ -19,14 +20,12 @@ public class Checking extends Account{
     private BigDecimal monthlyMaintenanceFee = new BigDecimal("12.00");
 
 
-
-
     public Checking() {
 
     }
 
     public Checking(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                      BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, AccountType accountType) {
+                    BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
         this.minimumBalance = minimumBalance;
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
@@ -34,7 +33,7 @@ public class Checking extends Account{
     }
 
     public Checking(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                     AccountType accountType) {
+                    AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
     }
 
@@ -64,7 +63,7 @@ public class Checking extends Account{
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
     }
 
-    public void setPrimaryOwner( AccountHolder primaryOwner) {
+    public void setPrimaryOwner(AccountHolder primaryOwner) {
         super.setPrimaryOwner(primaryOwner);
     }
 

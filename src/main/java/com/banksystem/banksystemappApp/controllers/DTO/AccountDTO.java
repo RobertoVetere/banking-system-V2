@@ -4,8 +4,6 @@ import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
 
-import static com.banksystem.banksystemappApp.models.RandomClass.randomAccountNumber;
-
 public class AccountDTO {
 
     private Long primaryOwnerId;

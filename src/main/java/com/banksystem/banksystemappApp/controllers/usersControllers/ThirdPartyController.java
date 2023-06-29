@@ -19,24 +19,24 @@ public class ThirdPartyController {
     ThirdPartyService thirdPartyService;
 
     @Autowired
-    TransactionService  transactionService;
+    TransactionService transactionService;
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<ThirdParty> findAllAccountHolders(){
+    public List<ThirdParty> findAllAccountHolders() {
         return thirdPartyService.findAllThirdParty();
     }
 
 
     @PatchMapping("/payment/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account payment(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO,@RequestParam String secretKey, String hashedKey){
+    public Account payment(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO, @RequestParam String secretKey, String hashedKey) {
         return transactionService.thirdPartyPayment(thirdPartyTransactionDTO, secretKey, hashedKey);
     }
 
     @PatchMapping("/receipts/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Account receipts(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO,@RequestParam String secretKey,String hashedKey){
+    public Account receipts(@RequestBody ThirdPartyTransactionDTO thirdPartyTransactionDTO, @RequestParam String secretKey, String hashedKey) {
         return transactionService.thirdPartyReceipt(thirdPartyTransactionDTO, secretKey, hashedKey);
     }
 

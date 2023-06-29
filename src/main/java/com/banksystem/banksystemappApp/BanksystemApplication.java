@@ -21,33 +21,33 @@ import java.util.List;
 @SpringBootApplication
 public class BanksystemApplication implements CommandLineRunner {
 
-	@Autowired
-	AccountHolderRepository accountHolderRepository;
+    @Autowired
+    AccountHolderRepository accountHolderRepository;
 
-	@Autowired
-	SavingsRepository savingsRepository;
+    @Autowired
+    SavingsRepository savingsRepository;
 
-	@Autowired
-	CheckingRepository checkingRepository;
+    @Autowired
+    CheckingRepository checkingRepository;
 
-	@Autowired
-	CreditCardRepository creditCardRepository;
+    @Autowired
+    CreditCardRepository creditCardRepository;
 
-	@Autowired
-	ThirdPartyRepository thirdPartyRepository;
+    @Autowired
+    ThirdPartyRepository thirdPartyRepository;
 
-	@Autowired
-	RoleRepository roleRepository;
+    @Autowired
+    RoleRepository roleRepository;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-	public static void main(String[] args) {
-		SpringApplication.run(BanksystemApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BanksystemApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 //passwordEncoder.encode("1234")
 /*
 		AccountHolder BankOfNeverland = new AccountHolder("Bank Of Neverland","admin","1234",LocalDate.of(1980, 3, 25),
@@ -103,11 +103,9 @@ public class BanksystemApplication implements CommandLineRunner {
 
 		Checking thirdPartyAccount = new Checking(new BigDecimal("0"),"12345679L",null,null,AccountType.CHECKING);
 
-
-
  */
 
-	}
+    }
 
 
 }

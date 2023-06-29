@@ -1,4 +1,5 @@
 package com.banksystem.banksystemappApp.models.accounts;
+
 import com.banksystem.banksystemappApp.enums.AccountType;
 import com.banksystem.banksystemappApp.models.users.AccountHolder;
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ public class Savings extends Account {
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
     }
+
     public Savings(BigDecimal balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    AccountType accountType) {
         super(balance, secretKey, primaryOwner, secondaryOwner, accountType);
@@ -56,23 +58,23 @@ public class Savings extends Account {
 
     public void setMinimumBalance(BigDecimal minimumBalance) {
 
-      try{
+        try {
 
-        BigDecimal limit = new BigDecimal("100.00");
+            BigDecimal limit = new BigDecimal("100.00");
 
-        if (minimumBalance.compareTo(limit) < 0) {
+            if (minimumBalance.compareTo(limit) < 0) {
 
-            this.minimumBalance = limit;
+                this.minimumBalance = limit;
 
-        }else{
+            } else {
 
-            this.minimumBalance = minimumBalance;
+                this.minimumBalance = minimumBalance;
 
+            }
+        } catch (IllegalArgumentException exception) {
+
+            throw new IllegalArgumentException("Please, set minimum balance ver 100");
         }
-      }catch (IllegalArgumentException exception) {
-
-          throw new IllegalArgumentException("Please, set minimum balance ver 100");
-      }
     }
 
     public Double getInterestRate() {
@@ -81,16 +83,16 @@ public class Savings extends Account {
 
     public void setInterestRate(Double interestRate) {
 
-        try{
+        try {
 
-        if (interestRate > 0.5) {
+            if (interestRate > 0.5) {
 
-            this.interestRate = 0.5;
+                this.interestRate = 0.5;
 
-        }else{
-            this.interestRate = interestRate;
-        }
-        }catch(IllegalArgumentException exception){
+            } else {
+                this.interestRate = interestRate;
+            }
+        } catch (IllegalArgumentException exception) {
 
             throw new IllegalArgumentException("Please, enter a correct interest rate");
 
